@@ -1,339 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Will You Be Mine?</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>For You</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap");
-
-      body {
-        font-family: "Poppins", sans-serif;
-        background: #121212;
-        color: #e0e0e0;
-        overflow-x: hidden;
-      }
-
-      .heart {
-        position: absolute;
-        pointer-events: none;
-        animation: float 6s ease-in-out infinite;
-      }
-
-      @keyframes float {
-        0% {
-          transform: translateY(0) rotate(0deg);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(-100vh) rotate(360deg);
-          opacity: 0;
-        }
-      }
-
-      .envelope {
-        transition: all 0.3s ease;
-        transform-style: preserve-3d;
-      }
-
-      .envelope:hover {
-        transform: translateY(-10px) rotateY(10deg);
-      }
-
-      .letter {
-        transform-origin: bottom;
-        transition: all 0.5s ease;
-      }
-
-      .open .letter {
-        transform: translateY(-150px) rotateX(180deg);
-      }
-
-      .promise-card {
-        transform: perspective(1000px) rotateY(0deg);
-        transition: all 0.5s ease;
-        backface-visibility: hidden;
-      }
-
-      .promise-card:hover {
-        transform: perspective(1000px) rotateY(15deg) scale(1.03);
-      }
-
-      .dancing-font {
-        font-family: "Dancing Script", cursive;
-      }
-
-      .photo-frame {
-        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
-        transition: all 0.5s ease;
-        transform: rotate(-5deg);
-      }
-
-      .photo-frame:hover {
-        transform: rotate(0deg) scale(1.05);
-      }
-
-      .ring-spin {
-        animation: spin 8s linear infinite;
-      }
-
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      .pulse {
-        animation: pulse 2s infinite;
-      }
-
-      @keyframes pulse {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.05);
-        }
-        100% {
-          transform: scale(1);
-        }
-      }
-
-      .typing {
-        overflow: hidden;
-        border-right: 3px solid;
-        white-space: nowrap;
-        animation: typing 3.5s steps(40, end),
-          blink-caret 0.75s step-end infinite;
-      }
-
-      @keyframes typing {
-        from {
-          width: 0;
-        }
-        to {
-          width: 100%;
-        }
-      }
-
-      @keyframes blink-caret {
-        from,
-        to {
-          border-color: transparent;
-        }
-        50% {
-          border-color: #ec4899;
-        }
-      }
-    </style>
-  </head>
-  <body class="min-h-screen relative overflow-x-hidden">
-    <!-- Floating hearts -->
-    <div id="hearts-container"></div>
-
-    <!-- Main content -->
-    <div class="container mx-auto px-4 py-12 max-w-6xl">
-      <!-- Header -->
-      <header class="text-center mb-16 animate__animated animate__fadeIn">
-        <h1
-          class="text-5xl md:text-7xl font-bold text-purple-400 dancing-font mb-4 typing"
-        >
-          Helloooo
-        </h1>
-        <p class="text-xl text-gray-400">Wondering why I've sent you this?</p>
-      </header>
-
-      <!-- Envelope with letter -->
-      <div
-        class="flex justify-center mb-20 animate__animated animate__fadeInUp"
-      >
-        <div
-          class="envelope relative w-64 h-40 bg-purple-700 rounded-lg cursor-pointer"
-          onclick="this.classList.toggle('open')"
-        >
-          <div
-            class="absolute top-0 w-full h-full bg-pink-400 rounded-lg transform -rotate-2 -translate-y-1 -z-10"
-          ></div>
-          <div
-            class="absolute top-0 left-0 w-0 h-0 border-t-[80px] border-t-pink-300 border-l-[128px] border-l-transparent border-r-[128px] border-r-transparent"
-          ></div>
-
-          <div
-            class="letter absolute bottom-0 left-1/2 transform -translate-x-1/2 w-60 h-48 bg-white rounded-lg p-4 shadow-lg"
-          >
-            <p class="text-sm text-gray-700">Okay so...</p>
-            <p class="text-xs mt-2 text-gray-600">
-              Seriously why have I sent you this? even i have no idea dude..
-            </p>
-            <div class="absolute bottom-2 right-2"></div>
-          </div>
-        </div>
-      </div>
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-
-      <h1
-        class="text-5xl md:text-7xl font-bold text-purple-400 dancing-font mb-4 typing"
-      >
-        OKAY FUCK IT. I LIKE YOU
-      </h1>
-
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-
-      <!-- Main letter content -->
-      <div
-        class="bg-gray-800 rounded-xl shadow-xl p-8 mb-16 animate__animated animate__fadeIn animate__delay-1s"
-      >
-        <div class="border-l-4 border-pink-500 pl-4 mb-6">
-          <h2 class="text-3xl font-bold text-purple-300 dancing-font">
-            I may have liked u from the time i had seen u
-          </h2>
-          <p class="text-gray-400">yes...</p>
-        </div>
-
-        <div class="space-y-6 text-gray-300">
-          <p class="animate__animated animate__fadeIn animate__delay-1s">
-            I kinda liked you ever since the day i had seen you ngl...
-          </p>
-
-          <p class="animate__animated animate__fadeIn animate__delay-1s">
-            I may have been just too awakard to say this shi- to you but man,
-            I'm doing this in this way.. lame i know..
-          </p>
-
-          <div
-            class="bg-pink-900 p-4 rounded-lg border border-pink-700 animate__animated animate__fadeIn animate__delay-3s"
-          >
-            <p class="font-semibold text-pink-300">
-              I know i ain't that special but.. aaaaaaaaa idk man i just thought
-              of saying this shit, its like yk.. if it happens it happens, and
-              if it doesn't then it doesn't
-            </p>
-          </div>
-
-          <div
-            class="text-center mt-10 animate__animated animate__fadeIn animate__delay-4s"
-          >
-            <p class="text-2xl dancing-font text-pink-400 font-bold">
-              With almost all of my confidence,
-            </p>
-            <p class="text-xl mt-2">Clyde</p>
-            <div class="mt-4 inline-block pulse">
-              <i class="fas fa-heart text-pink-500 text-4xl"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-      <h1
-        class="text-5xl md:text-7xl font-bold text-purple-400 dancing-font mb-4 typing"
-      >
-        So... Lemme just ask you this.. I'm pretty sure i know the answer but
-        still..
-      </h1>
-
-      <!-- Final declaration -->
-      <div
-        class="text-center py-12 animate__animated animate__fadeIn animate__delay-7s"
-      >
-        <div class="inline-block transform rotate-3 mb-6">
-          <div class="text-5xl text-pink-500">
-            <i class="fas fa-heart"></i>
-          </div>
-        </div>
-        <h2
-          class="text-4xl md:text-5xl font-bold text-purple-300 dancing-font mb-6"
-        >
-          Will You Be My Special Someone?
-        </h2>
-        <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-          I really like you and want to see where this could go.
-        </p>
-
-        <div class="mt-8 animate__animated animate__pulse animate__infinite">
-          <button
-            class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transform transition-all duration-300 hover:scale-105"
-          >
-            <a href="">
-              Say "Yes" to Us (the button doesn't do shit but just for the ✨
-              effect ✨)</a
-            >
-          </button>
-        </div>
-      </div>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-indigo-950 text-indigo-100 font-mono overflow-x-hidden">
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div id="stars" class="absolute inset-0 opacity-70"></div>
+        <div id="particles" class="absolute inset-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-indigo-950/80"></div>
+        <div class="absolute inset-0 noise-pattern opacity-10"></div>
     </div>
 
-    <!-- Floating hearts animation -->
+    <main class="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-20">
+        <section class="max-w-2xl w-full space-y-32">
+            <!-- Opening -->
+            <div class="h-screen flex items-center justify-center">
+                <p class="pixel-text text-2xl md:text-3xl text-indigo-200 animate-fade-in opacity-0" style="animation-delay: 1s">
+                    This is a promise...
+                </p>
+            </div>
+
+            <!-- Promise Sections -->
+            <div class="space-y-8">
+                <p class="pixel-text text-xl md:text-2xl animate-fade-in opacity-0" style="animation-delay: 2s">
+                    Not born from emotion or desire
+                </p>
+                <p class="pixel-text text-xl md:text-2xl animate-fade-in opacity-0" style="animation-delay: 3s">
+                    But chosen deliberately
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <p class="pixel-text text-xl md:text-2xl animate-fade-in opacity-0" style="animation-delay: 4s">
+                    To protect one thing above all
+                </p>
+                <p class="pixel-text text-2xl md:text-3xl text-indigo-100 font-medium animate-fade-in opacity-0 hover-glow" style="animation-delay: 5s">
+                    Your smile
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <p class="pixel-text text-lg md:text-xl animate-fade-in opacity-0" style="animation-delay: 6s">
+                    Because it matters to me the most
+                </p>
+                <p class="pixel-text text-lg md:text-xl animate-fade-in opacity-0" style="animation-delay: 7s">
+                    More than anything else in this whole world
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <p class="pixel-text text-xl md:text-2xl animate-fade-in opacity-0" style="animation-delay: 8s">
+                    A soul like yours
+                </p>
+                <p class="pixel-text text-xl md:text-2xl animate-fade-in opacity-0" style="animation-delay: 9s">
+                    Deserves safety and softness
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <p class="pixel-text text-xl md:text-2xl animate-fade-in opacity-0" style="animation-delay: 8s">
+                    I know I am stupid at a lot of moments
+                </p>
+                <p class="pixel-text text-xl md:text-2xl animate-fade-in opacity-0" style="animation-delay: 9s">
+                    But I swear.. I will take care of you like a princess
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <p class="pixel-text text-xl md:text-2xl animate-fade-in opacity-0" style="animation-delay: 8s">
+                    I will never hurt you.. 
+                </p>
+                <p class="pixel-text text-xl md:text-2xl animate-fade-in opacity-0" style="animation-delay: 9s">
+                    I just want you to smile.. 
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <p class="pixel-text text-lg md:text-xl animate-fade-in opacity-0" style="animation-delay: 10s">
+                    If the world is careless with you
+                </p>
+                <p class="pixel-text text-lg md:text-xl animate-fade-in opacity-0" style="animation-delay: 11s">
+                    I'll choose to be careful
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <p class="pixel-text text-lg md:text-xl animate-fade-in opacity-0" style="animation-delay: 12s">
+                    If the world is loud
+                </p>
+                <p class="pixel-text text-lg md:text-xl animate-fade-in opacity-0" style="animation-delay: 13s">
+                    I'll choose to be your quiet place
+                </p>
+            </div>
+
+            <!-- Final Promise -->
+            <div class="h-screen flex items-center justify-center">
+                <p class="pixel-text text-2xl md:text-3xl text-indigo-100 animate-fade-in opacity-0 hover-glow" style="animation-delay: 12s" id="final-promise">
+                    To honor your light<br>all my days (ifykyk)
+                </p>
+            </div>
+        </section>
+    </main>
+
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Create floating hearts
-        function createHearts() {
-          const container = document.getElementById("hearts-container");
-          const heart = document.createElement("div");
-          heart.className = "heart text-purple-400 opacity-70";
-          heart.innerHTML = "❤";
-
-          // Random size
-          const size = Math.random() * 20 + 10;
-          heart.style.fontSize = `${size}px`;
-
-          // Random position
-          heart.style.left = Math.random() * 100 + "vw";
-          heart.style.top = Math.random() * 100 + "vh";
-
-          // Random animation duration
-          const duration = Math.random() * 5 + 5;
-          heart.style.animationDuration = `${duration}s`;
-
-          container.appendChild(heart);
-
-          // Remove heart after animation completes
-          setTimeout(() => {
-            heart.remove();
-          }, duration * 1000);
-        }
-
-        // Create hearts periodically
-        setInterval(createHearts, 300);
-
-        // Initial hearts
-        for (let i = 0; i < 15; i++) {
-          setTimeout(createHearts, i * 200);
-        }
-
-        // Add animation to elements when they come into view
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("animate__fadeInUp");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.1 }
-        );
-
-        document
-          .querySelectorAll(".promise-card, .relative")
-          .forEach((card) => {
-            observer.observe(card);
-          });
-      });
+        feather.replace();
     </script>
-  </body>
+</body>
 </html>
