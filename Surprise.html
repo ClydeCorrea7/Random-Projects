@@ -1,426 +1,386 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>For You — Digital Scrapbook</title>
+    <title>Happy Belated, Ariana! — Digital Scrapbook</title>
 
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Fonts: Pixel + Clean -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet" />
 
     <style>
-      :root {
-        --bg-0: #050612;
-        --bg-1: #07102a;
-        --neon: #00f0ff;
-        --accent: #7c5cff;
-        --text-weak: #9fb8ff;
-        --text-strong: #dff3ff;
-      }
-
-      body {
-        margin: 0;
-        font-family: "Inter", system-ui;
-        background: linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 60%);
-        color: var(--text-strong);
-        overflow-x: hidden;
-        -webkit-font-smoothing: antialiased;
-      }
-
-      /* Sections now scroll normally */
-      section.chapter {
-        min-height: 100vh;
-        padding: 6rem 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      /* Pixel sky background */
-      .pixel-sky {
-        position: fixed;
-        inset: 0;
-        z-index: -3;
-        background: radial-gradient(
-            circle at 10% 20%,
-            rgba(255, 255, 255, 0.06) 0px,
-            transparent 2px
-          ),
-          radial-gradient(
-            circle at 80% 10%,
-            rgba(255, 255, 255, 0.04) 0px,
-            transparent 2px
-          ),
-          radial-gradient(
-            circle at 30% 70%,
-            rgba(255, 255, 255, 0.03) 0px,
-            transparent 2px
-          ),
-          linear-gradient(
-            180deg,
-            rgba(7, 16, 42, 0.2) 0%,
-            rgba(5, 6, 18, 0.35) 100%
-          );
-        animation: starShift 20s linear infinite;
-      }
-
-      @keyframes starShift {
-        0% {
-          transform: translateY(0);
-          opacity: 1;
+        :root {
+            --bg-0: #050612;
+            --bg-1: #07102a;
+            --neon: #00f0ff;
+            --accent: #7c5cff;
+            --text-weak: #9fb8ff;
+            --text-strong: #dff3ff;
         }
-        50% {
-          transform: translateY(-20px);
-          opacity: 0.9;
+
+        body {
+            margin: 0;
+            font-family: "Inter", system-ui;
+            background: linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 60%);
+            color: var(--text-strong);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
-        100% {
-          transform: translateY(0);
-          opacity: 1;
+
+        /* Sections now scroll normally */
+        section.chapter {
+            min-height: 100vh;
+            padding: 6rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-      }
 
-      .pixel-grid::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        z-index: -2;
-        background-image: radial-gradient(
-          circle,
-          rgba(255, 255, 255, 0.02) 1px,
-          transparent 1px
-        );
-        background-size: 24px 24px;
-        opacity: 0.5;
-        animation: gridFloat 10s linear infinite;
-        pointer-events: none;
-      }
-
-      @keyframes gridFloat {
-        0% {
-          transform: translateY(0);
+        /* Pixel sky background */
+        .pixel-sky {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            background: radial-gradient(circle at 10% 20%,
+                    rgba(255, 255, 255, 0.06) 0px,
+                    transparent 2px),
+                radial-gradient(circle at 80% 10%,
+                    rgba(255, 255, 255, 0.04) 0px,
+                    transparent 2px),
+                radial-gradient(circle at 30% 70%,
+                    rgba(255, 255, 255, 0.03) 0px,
+                    transparent 2px),
+                linear-gradient(180deg,
+                    rgba(7, 16, 42, 0.2) 0%,
+                    rgba(5, 6, 18, 0.35) 100%);
+            animation: starShift 20s linear infinite;
         }
-        50% {
-          transform: translateY(-6px);
+
+        @keyframes starShift {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-20px);
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
-        100% {
-          transform: translateY(0);
+
+        .pixel-grid::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background-image: radial-gradient(circle,
+                    rgba(255, 255, 255, 0.02) 1px,
+                    transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.5;
+            animation: gridFloat 10s linear infinite;
+            pointer-events: none;
         }
-      }
 
-      .crt::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        background: repeating-linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 0.03) 0px,
-          rgba(0, 0, 0, 0.03) 1px,
-          transparent 1px,
-          transparent 2px
-        );
-        opacity: 0.25;
-        pointer-events: none;
-      }
+        @keyframes gridFloat {
+            0% {
+                transform: translateY(0);
+            }
 
-      .pixel {
-        font-family: "Press Start 2P", monospace;
-      }
+            50% {
+                transform: translateY(-6px);
+            }
 
-      .card {
-        width: min(1100px, 96%);
-        background: rgba(255, 255, 255, 0.03);
-        border-radius: 14px;
-        padding: 2.4rem;
-        border: 1px solid rgba(124, 92, 255, 0.12);
-        backdrop-filter: blur(6px) saturate(120%);
-        box-shadow: 0 8px 40px rgba(3, 6, 20, 0.6);
-      }
-
-      .neon-text {
-        color: var(--neon);
-        text-shadow: 0 0 8px rgba(0, 240, 255, 0.25);
-      }
-
-      .typewriter {
-        font-family: "Press Start 2P";
-        font-size: 0.95rem;
-        color: var(--text-weak);
-      }
-      .cursor {
-        width: 12px;
-        height: 18px;
-        background: var(--neon);
-        animation: blink 900ms steps(2, start) infinite;
-        display: inline-block;
-        vertical-align: middle;
-      }
-      @keyframes blink {
-        50% {
-          opacity: 0;
+            100% {
+                transform: translateY(0);
+            }
         }
-      }
 
-      .reveal-line {
-        opacity: 0;
-        font-family: "Pixelify Sans", sans-serif;
-        font-size: 20px;
-        transform: translateY(10px);
-        transition: 0.6s ease;
-      }
-      .reveal-line.show {
-        opacity: 1;
-        transform: translateY(0);
-      }
+        .crt::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: repeating-linear-gradient(180deg,
+                    rgba(0, 0, 0, 0.03) 0px,
+                    rgba(0, 0, 0, 0.03) 1px,
+                    transparent 1px,
+                    transparent 2px);
+            opacity: 0.25;
+            pointer-events: none;
+        }
 
-      .btn-neon {
-        background: rgba(0, 240, 255, 0.1);
-        border: 1px solid rgba(0, 240, 255, 0.22);
-        color: var(--neon);
-        padding: 0.7rem 1.1rem;
-        border-radius: 10px;
-        font-family: "Pixelify Sans", sans-serif;
-        font-weight: 700;
-        letter-spacing: 0.6px;
-      }
-      .btn-neon:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 0 18px rgba(0, 240, 255, 0.3);
-      }
+        .pixel {
+            font-family: "Press Start 2P", monospace;
+        }
 
-      @media (max-width: 640px) {
         .card {
-          padding: 1.4rem;
+            width: min(1100px, 96%);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            padding: 2.4rem;
+            border: 1px solid rgba(124, 92, 255, 0.12);
+            backdrop-filter: blur(6px) saturate(120%);
+            box-shadow: 0 8px 40px rgba(3, 6, 20, 0.6);
         }
+
+        .neon-text {
+            color: var(--neon);
+            text-shadow: 0 0 8px rgba(0, 240, 255, 0.25);
+        }
+
         .typewriter {
-          font-size: 0.8rem;
+            font-family: "Press Start 2P";
+            font-size: 0.95rem;
+            color: var(--text-weak);
         }
-      }
+
+        .cursor {
+            width: 12px;
+            height: 18px;
+            background: var(--neon);
+            animation: blink 900ms steps(2, start) infinite;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .reveal-line {
+            opacity: 0;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 20px;
+            transform: translateY(10px);
+            transition: 0.6s ease;
+        }
+
+        .reveal-line.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn-neon {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.22);
+            color: var(--neon);
+            padding: 0.7rem 1.1rem;
+            border-radius: 10px;
+            font-family: "Pixelify Sans", sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+        }
+
+        .btn-neon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 18px rgba(0, 240, 255, 0.3);
+        }
+
+        @media (max-width: 640px) {
+            .card {
+                padding: 1.4rem;
+            }
+
+            .typewriter {
+                font-size: 0.8rem;
+            }
+        }
     </style>
 
     <script>
-      function revealSecret() {
-        document.getElementById("secret").style.display = "block";
-        document.getElementById("revealBtn").style.display = "none";
-      }
-
-      function typeWrite(text, el, i = 0) {
-        if (i < text.length) {
-          el.innerHTML += text.charAt(i);
-          setTimeout(() => typeWrite(text, el, i + 1), 45);
+        function revealSecret() {
+            document.getElementById("secret").style.display = "block";
+            document.getElementById("revealBtn").style.display = "none";
         }
-      }
 
-      window.onload = () => {
-        typeWrite(
-          "this exists because you matter.",
-          document.getElementById("intro-type")
-        );
-        document.querySelectorAll(".reveal-line").forEach((el) => {
-          const obs = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((e) => {
-                if (e.isIntersecting) e.target.classList.add("show");
-              });
-            },
-            { threshold: 0.2 }
-          );
-          obs.observe(el);
-        });
-      };
+        function typeWrite(text, el, i = 0) {
+            if (i < text.length) {
+                el.innerHTML += text.charAt(i);
+                setTimeout(() => typeWrite(text, el, i + 1), 45);
+            }
+        }
+
+        window.onload = () => {
+            typeWrite(
+                "I know I'm late, but the magic hasn't expired yet.",
+                document.getElementById("intro-type")
+            );
+            document.querySelectorAll(".reveal-line").forEach((el) => {
+                const obs = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((e) => {
+                            if (e.isIntersecting) e.target.classList.add("show");
+                        });
+                    },
+                    { threshold: 0.2 }
+                );
+                obs.observe(el);
+            });
+        };
     </script>
-  </head>
+</head>
 
-  <body class="pixel-grid crt">
+<body class="pixel-grid crt">
     <div class="pixel-sky"></div>
 
     <!-- INTRO -->
     <section class="chapter text-center">
-      <div class="card">
-        <h1 class="pixel neon-text text-3xl mb-4">FOR YOU</h1>
-        <p id="intro-type" class="typewriter mb-3"></p>
-        <span class="cursor"></span>
+        <div class="card">
+            <h1 class="pixel neon-text text-3xl mb-4">HAPPY BELATED BIRTHDAYYYY ARIANA</h1>
+            <p id="intro-type" class="typewriter mb-3"></p>
+            <span class="cursor"></span>
 
-        <div class="mt-6">
-          <button
-            onclick="window.scrollTo({top: window.innerHeight, behavior:'smooth'})"
-            class="btn-neon"
-          >
-            Next
-          </button>
+            <div class="mt-6">
+                <button onclick="window.scrollTo({top: window.innerHeight, behavior:'smooth'})" class="btn-neon">
+                    Next
+                </button>
+            </div>
         </div>
-      </div>
     </section>
 
     <!-- WHY I TRUST YOU -->
     <section class="chapter">
-      <div class="card">
-        <h2 class="pixel text-cyan-300 text-xl mb-2 text-center">
-          Why I Trust You
-        </h2>
-        <div class="space-y-3 text-purple-100/90 max-w-2xl mx-auto">
-          <p class="reveal-line">
-            You're the kind of person who doesn't just say things, you mean
-            them.
-          </p>
-          <p class="reveal-line">
-            I trust you because you've never made me feel small for being
-            honest.
-          </p>
-          <p class="reveal-line">
-            You don't pretend or perform — you just exist, which is rarer than
-            it sounds.
-          </p>
-          <p class="reveal-line">
-            Nothing about my trust is accidental. It's chosen, and it's steady.
-          </p>
+        <div class="card">
+            <h2 class="pixel text-cyan-300 text-xl mb-2 text-center">
+                Why You're One of a Kind
+            </h2>
+            <div class="space-y-3 text-purple-100/90 max-w-2xl mx-auto">
+                <p class="reveal-line">
+                    You have this way of making everything feel a bit more colorful.
+                </p>
+                <p class="reveal-line">
+                    Your energy is something the world definitely needs more of.
+                </p>
+                <p class="reveal-line">
+                    I'm lucky to know someone as genuine and kind as you.
+                </p>
+                <p class="reveal-line">
+                    Even if I missed the exact day, and met you just a little late I do wanna wish u a VERYYYYY happy
+                    belated birthday.
+                </p>
+            </div>
         </div>
-      </div>
     </section>
 
     <!-- QUOTES -->
     <section class="chapter">
-      <div class="card">
-        <h2 class="pixel text-cyan-300 text-xl mb-4 text-center">
-          Words I Want You To Remember
-        </h2>
-        <div class="space-y-3 max-w-2xl mx-auto">
-          <p class="reveal-line">
-            You don’t have to earn peace — you deserve it by existing.
-          </p>
-          <p class="reveal-line">
-            You're not a burden for feeling things deeply.
-          </p>
-          <p class="reveal-line">Being soft isn't weak — it's human.</p>
-          <p class="reveal-line">
-            The world is quieter when you're gone, even if you don’t notice it.
-          </p>
+        <div class="card">
+            <h2 class="pixel text-cyan-300 text-xl mb-4 text-center">
+                Wishes For Your New Year
+            </h2>
+            <div class="space-y-3 max-w-2xl mx-auto">
+                <p class="reveal-line">
+                    May your year be filled with spontaneous joy and endless laughter.
+                </p>
+                <p class="reveal-line">
+                    I hope you find beauty in the small, quiet moments.
+                </p>
+                <p class="reveal-line">You deserve a life that feels as bright as your smile.</p>
+                <p class="reveal-line">
+                    Don't ever let the world dim your sparkle, Ariana.
+                </p>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- FUTURE PROMISES -->
+    <!-- THE GRACE YOU CARRY -->
     <section class="chapter">
-      <div class="card">
-        <h2 class="pixel text-cyan-300 text-xl mb-4 text-center">
-          Future Promises
-        </h2>
-        <div
-          class="space-y-6 text-purple-200 text-lg leading-relaxed max-w-3xl mx-auto"
-        >
-          <p class="reveal-line">
-            No matter what changes, I'm always rooting for you to be happy.
-          </p>
-          <p class="reveal-line">
-            I may not always be beside you, but I’ll always be on your side.
-          </p>
-          <p class="reveal-line">
-            Even if life pulls us into different chapters, I’ll still be
-            cheering for your wins from the margins.
-          </p>
-          <p class="reveal-line">
-            If the world ever feels too loud, you can always count on me to be
-            the quiet that listens.
-          </p>
-          <p class="reveal-line">
-            No matter how many times life resets, my trust in you doesn’t.
-          </p>
-          <p class="reveal-line">
-            I’ll celebrate your strength even on the days you can’t see it
-            yourself.
-          </p>
-          <p class="reveal-line">
-            If you forget who you are, I’ll remind you of the version I believe
-            in — the real one.
-          </p>
-          <p class="reveal-line">
-            Even when the world isn’t gentle with you, I will be.
-          </p>
-          <p class="reveal-line">
-            I don’t need you to be perfect, just real — and I’ll always respect
-            that version of you.
-          </p>
-          <p class="reveal-line">
-            Life is going to change, but my hope for your peace never will.
-          </p>
-          <p class="reveal-line">
-            If there’s ever a moment you feel alone, remember: someone out there
-            still believes in you without hesitation.
-          </p>
-          <p class="reveal-line">
-            Your happiness isn’t a condition — it’s something I’ll root for
-            every time, without being asked.
-          </p>
-          <p class="reveal-line">
-            I won’t always know what you need, but I’ll never stop trying to
-            understand.
-          </p>
-          <p class="reveal-line">
-            If one day we stop talking, I’ll still be grateful I got to know you
-            in this timeline.
-          </p>
-          <p class="reveal-line">
-            Even when the distance grows, the respect stays.
-          </p>
-          <p class="reveal-line">
-            You don’t owe me anything, but I’ll keep wishing you everything good
-            anyway.
-          </p>
-          <p class="reveal-line">
-            The world may not always choose you, but I will.
-          </p>
+        <div class="card">
+            <h2 class="pixel text-cyan-300 text-xl mb-6 text-center">
+                The Grace You Carry
+            </h2>
+            <div class="space-y-10 text-purple-200 text-lg leading-relaxed max-w-3xl mx-auto text-center italic">
+                <div class="reveal-line">
+                    You carry Athena’s mind, precise and bright,<br>
+                    A steady fire no chaos can dethrone,<br>
+                    You walk like Artemis, fierce in quiet night,<br>
+                    Untamed, yet never truly alone.
+                </div>
+
+                <div class="reveal-line">
+                    You hold Hestia’s warmth within your soul,<br>
+                    A sacred calm the restless lean into,<br>
+                    You echo Nyx, depths beyond control,<br>
+                    And even darkness softens around you.
+                </div>
+
+                <div class="reveal-line">
+                    You bloom like Persephone, soft spring reborn,<br>
+                    Yet carry autumn’s quiet, shadowed grace,<br>
+                    You guard like Hera, regal, never torn,<br>
+                    A sovereign strength no time could erase.
+                </div>
+
+                <div class="reveal-line">
+                    You shine with Selene, gentle silver light,<br>
+                    A calm that pulls the tides without a sound,<br>
+                    You flow like Iris, colors stitched in flight,<br>
+                    A fleeting beauty heaven sent to ground.
+                </div>
+
+                <div class="reveal-line">
+                    You blaze like Hecate, keeper of the flame,<br>
+                    At every crossroad, you command the dark,<br>
+                    You roar with Demeter’s fierce, unyielding claim,<br>
+                    A love that turns the barren into spark.
+                </div>
+
+                <div class="reveal-line">
+                    You rise like Eos, painting skies anew,<br>
+                    Each dawn feels softer just because of you,<br>
+                    You hold Themis’ truth in all you do,<br>
+                    A balance rare, unwavering and true.
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
     <!-- SECRET -->
     <section class="chapter">
-      <div class="card text-center max-w-xl mx-auto">
-        <h3 class="pixel text-cyan-300 mb-4">A small secret</h3>
-        <p class="reveal-line">Click the button if you want the quiet truth.</p>
-        <button id="revealBtn" onclick="revealSecret()" class="btn-neon">
-          Reveal
-        </button>
+        <div class="card text-center max-w-xl mx-auto">
+            <h3 class="pixel text-cyan-300 mb-4">A small confession</h3>
+            <p class="reveal-line">Click if you want to know</p>
+            <button id="revealBtn" onclick="revealSecret()" class="btn-neon">
+                Reveal
+            </button>
 
-        <div
-          id="secret"
-          class="mt-6 p-4 rounded-md border border-purple-700/20"
-          style="display: none"
-        >
-          <p class="reveal-line">
-            I meant every word. Not for show. Not for temporary comfort. Just
-            truth — always.
-          </p>
+            <div id="secret" class="mt-6 p-4 rounded-md border border-purple-700/20" style="display: none">
+                <p class="reveal-line">
+                    I was busy looking for a gift as cool as you... and realized nothing really compares.
+                    (Okay, I just couldn't find the right one, but you're still the best!)
+                </p>
+            </div>
         </div>
-      </div>
     </section>
 
     <!-- END -->
     <section class="chapter">
-      <div class="card text-center max-w-xl mx-auto">
-        <h4 class="pixel neon-text text-xl mb-3">You're not alone</h4>
-        <p class="reveal-line">
-          You never were. If you ever need a reminder, this page exists. Keep
-          it. Reopen it. Let it be small fuel.
-        </p>
-        <button
-          onclick="window.scrollTo({top:0,behavior:'smooth'})"
-          class="btn-neon"
-        >
-          Back to Top
-        </button>
-        <p class="reveal-line">Made with time, not money. That counts.</p>
-      </div>
+        <div class="card text-center max-w-xl mx-auto">
+            <h4 class="pixel neon-text text-xl mb-3">Happy Birthday, Ariana! (belated but still counts)</h4>
+            <p class="reveal-line">
+                Better late than never, right? This page is yours whenever you need a little boost.
+                Have the best year yet.
+            </p>
+            <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="btn-neon">
+                Back to Top
+            </button>
+            <p class="reveal-line">Made with time, stupid amount of overthinking and not money.</p>
+        </div>
     </section>
-  </body>
+</body>
+
 </html>
