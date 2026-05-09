@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Unnati ✨</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --navy: #060714;
+            --purple-dark: #1a103c;
+            --lavender: #b088f9;
+            --pink: #f9a8d4;
+            --cyan: #8be9fd;
+            --white: #ffffff;
+            --font-main: 'Outfit', sans-serif;
+            --font-hand: 'Caveat', cursive;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background: var(--navy);
+            color: var(--white);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, var(--purple-dark) 0%, var(--navy) 100%);
+            z-index: -2;
+        }
+
+        canvas#bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        #darken-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 5;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 10;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.8s;
+        }
+
+        .delay-3 {
+            transition-delay: 1.2s;
+        }
+
+        .delay-4 {
+            transition-delay: 1.6s;
+        }
+
+        .delay-5 {
+            transition-delay: 2.0s;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0;
+        }
+
+        .text-glow {
+            text-shadow: 0 0 15px rgba(176, 136, 249, 0.5);
+        }
+
+        .text-glow-pink {
+            text-shadow: 0 0 15px rgba(249, 168, 212, 0.5);
+        }
+
+        .handwritten {
+            font-family: var(--font-hand);
+            font-size: 2.2rem;
+            color: var(--pink);
+            line-height: 1.2;
+            letter-spacing: 1px;
+        }
+
+        .micro-text {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.2);
+            position: absolute;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        /* Section 1: Intro */
+        .intro-text {
+            font-size: 1.6rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 8%;
+            animation: bounce 2s infinite ease-in-out;
+            opacity: 0.6;
+            font-size: 1.5rem;
+            color: var(--lavender);
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-15px);
+            }
+
+            60% {
+                transform: translateY(-7px);
+            }
+        }
+
+        /* Section 2: Cards */
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            width: 100%;
+            max-width: 350px;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(176, 136, 249, 0.15);
+            padding: 1.5rem 1.2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            position: relative;
+        }
+
+        .card:active,
+        .card:hover {
+            transform: scale(1.03) !important;
+            box-shadow: 0 10px 25px rgba(176, 136, 249, 0.2);
+            border-color: rgba(176, 136, 249, 0.4);
+            z-index: 2;
+        }
+
+        .card-1 {
+            transform: rotate(-2deg);
+        }
+
+        .card-2 {
+            transform: rotate(1.5deg);
+        }
+
+        .card-3 {
+            transform: rotate(-1.5deg);
+        }
+
+        .card-4 {
+            transform: rotate(2deg);
+        }
+
+        .card p {
+            font-size: 1.15rem;
+            font-weight: 300;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Section 3: Emotional */
+        #sec-3 {
+            padding: 2rem;
+        }
+
+        .emotional-text {
+            font-size: 1.4rem;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .emotional-text.highlight {
+            color: var(--white);
+            font-weight: 400;
+        }
+
+        /* Section 4: Genuine Message */
+        .genuine-text {
+            font-size: 1.35rem;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .marathi-highlight {
+            font-size: 2.4rem;
+            color: var(--cyan);
+            margin-top: 1rem;
+            text-shadow: 0 0 15px rgba(139, 233, 253, 0.4);
+            transform: rotate(-2deg);
+        }
+
+        /* Section 5: Finale */
+        #sec-5 {
+            z-index: 10;
+        }
+
+        #s5-pre {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.6;
+            transition: opacity 2s ease;
+        }
+
+        #s5-main {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            padding: 0 1rem;
+        }
+
+        .huge-text {
+            font-size: 2.8rem;
+            font-weight: 600;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            text-shadow: 0 0 15px var(--lavender), 0 0 30px var(--pink);
+            animation: pulse-glow 2.5s infinite alternate ease-in-out;
+            text-align: center;
+        }
+
+        .finale-sub {
+            font-size: 2.2rem;
+            color: var(--cyan);
+            text-shadow: 0 0 15px rgba(139, 233, 253, 0.5);
+            transform: rotate(-3deg);
+            margin-top: 1rem;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                text-shadow: 0 0 15px var(--lavender), 0 0 30px var(--pink);
+                transform: scale(1);
+            }
+
+            100% {
+                text-shadow: 0 0 25px var(--lavender), 0 0 45px var(--pink), 0 0 60px var(--cyan);
+                transform: scale(1.02);
+            }
+        }
+
+        /* Toast Details */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20, 15, 45, 0.6);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            z-index: 100;
+            pointer-events: none;
+            border: 1px solid rgba(176, 136, 249, 0.2);
+            color: var(--pink);
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+    <div id="darken-overlay"></div>
+    <div class="toast" id="toast"></div>
+
+    <div class="content-layer">
+
+        <!-- SECTION 1 -->
+        <section id="sec-1">
+            <div class="micro-text" style="top: 30px; left: 20px; opacity: 0.5;">Sys.Boot // Unnati.exe</div>
+            <div class="intro-text fade-in">
+                Hmmmmmm…
+                <br><br><br>
+                <span class="delay-1 fade-in" style="display:inline-block">I wonder what this page is for?</span>
+                <br><br><br>
+                <span class="delay-2 fade-in" style="display:inline-block; font-size: 1.2rem; color: var(--pink);">Maybe
+                    scroll down a little bit?</span>
+            </div>
+            <div class="scroll-indicator fade-in delay-3">↓</div>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section id="sec-2">
+            <div class="micro-text" style="top: 10%; right: 5%; transform: rotate(10deg);">Certified idiot detected.
+            </div>
+            <h2 class="handwritten fade-in text-glow" style="font-size: 2.8rem; margin-bottom: 0.5rem;">Why you're
+                amazing</h2>
+            <p class="fade-in delay-1"
+                style="font-size: 0.9rem; color: var(--lavender); margin-bottom: 2rem; font-weight: 300;">(or just
+                mildly tolerable)</p>
+
+            <div class="cards-container">
+                <div class="card card-1 fade-in delay-1">
+                    <p>“You somehow manage to be adorable and annoying at the exact same time.”</p>
+                </div>
+                <div class="card card-2 fade-in delay-2">
+                    <p>“Your laugh genuinely feels like serotonin.”</p>
+                </div>
+                <div class="card card-3 fade-in delay-3">
+                    <p>“You make stupid conversations weirdly unforgettable.”</p>
+                </div>
+                <div class="card card-4 fade-in delay-4">
+                    <p>“Your energy could probably revive a dying medieval kingdom.”</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section id="sec-3">
+            <div class="micro-text" style="bottom: 12%; left: 8%;">Too many memories loading...</div>
+            <div class="emotional-text fade-in">
+                It’s crazy how we never talked during school…
+            </div>
+            <div class="handwritten fade-in delay-1"
+                style="font-size: 1.5rem; color: var(--lavender); margin-bottom: 2.5rem; opacity: 0.9; transform: rotate(-2deg);">
+                (School madhe barely bollo ani atta bagh… kay scene zala)
+            </div>
+            <div class="emotional-text fade-in delay-2">
+                and now here we are being stupid together.
+            </div>
+            <div class="emotional-text fade-in delay-3">
+                Life is weird like that.
+            </div>
+            <div class="emotional-text fade-in delay-4">
+                One random conversation changed everything.
+            </div>
+            <div class="emotional-text highlight fade-in delay-5 text-glow-pink"
+                style="margin-top: 1rem; font-size: 1.6rem;">
+                Now somehow you became one of my favorite people.
+            </div>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section id="sec-4">
+            <div class="micro-text" style="top: 15%; right: 10%; transform: rotate(-5deg);">Kay re maakdin.</div>
+            <div class="genuine-text fade-in">
+                I’m genuinely really glad you exist.
+            </div>
+            <div class="genuine-text fade-in delay-1">
+                You make life feel lighter in ways you probably don’t even realize.
+            </div>
+            <div class="genuine-text fade-in delay-2" style="margin-bottom: 3rem;">
+                I hope this year gives back even half the happiness you give other people.
+            </div>
+            <div class="handwritten marathi-highlight fade-in delay-3">
+                Tu genuinely khup precious ahes, maakdin.
+            </div>
+        </section>
+
+        <!-- SECTION 5 (FINALE) -->
+        <section id="sec-5">
+            <div id="s5-pre" class="fade-in">
+                Anyway…
+                <br><br>
+                <span class="delay-2 fade-in" style="display:inline-block;">there was one more thing.</span>
+            </div>
+            <div id="s5-main">
+                <div class="huge-text fade-in">HAPPY BIRTHDAY<br>UNNATI ✨</div>
+                <div class="handwritten finale-sub fade-in delay-2">Forever proud of you, maakdin.</div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Smooth scroll fade-in observer
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.25 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Optional: stop observing once visible
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            if (!el.closest('#s5-main')) { // Don't auto-observe finale main items
+                observer.observe(el);
+            }
+        });
+
+        // Background Particles & Fireworks Logic
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d', { alpha: false });
+        let width, height;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        const particles = [];
+        const colors = ['#b088f9', '#f9a8d4', '#8be9fd', '#ffffff'];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height; // Distribute evenly on start
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speed = Math.random() * 0.4 + 0.1;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.alpha = Math.random() * 0.6 + 0.1;
+                this.swing = Math.random() * 3;
+                this.swingSpeed = Math.random() * 0.015;
+                this.angle = Math.random() * Math.PI * 2;
+            }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = height + 10;
+            }
+            update() {
+                this.y -= this.speed;
+                this.x += Math.sin(this.angle) * 0.4;
+                this.angle += this.swingSpeed;
+                if (this.y < -10) this.reset();
+            }
+            draw() {
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Initialize background particles
+        for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+        const fireworks = [];
+        const sparkles = [];
+        let finaleActive = false;
+
+        class Firework {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = height;
+                this.targetY = height * 0.1 + Math.random() * (height * 0.4);
+                this.speed = Math.random() * 4 + 3;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.exploded = false;
+            }
+            update() {
+                if (!this.exploded) {
+                    this.y -= this.speed;
+                    this.speed *= 0.98; // ease out
+                    if (this.y <= this.targetY || this.speed < 0.5) {
+                        this.explode();
+                        this.exploded = true;
+                    }
+                }
+            }
+            draw() {
+                if (!this.exploded) {
+                    ctx.globalAlpha = 0.8;
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            explode() {
+                const count = Math.random() * 30 + 40;
+                for (let i = 0; i < count; i++) {
+                    sparkles.push(new Sparkle(this.x, this.y, this.color));
+                }
+            }
+        }
+
+        class Sparkle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 5 + 2;
+                this.vx = Math.cos(angle) * velocity;
+                this.vy = Math.sin(angle) * velocity;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.02 + 0.015;
+                this.gravity = 0.08;
+                this.size = Math.random() * 2 + 1;
+            }
+            update() {
+                this.vx *= 0.95; // friction
+                this.vy *= 0.95;
+                this.x += this.vx;
+                this.vy += this.gravity;
+                this.y += this.vy;
+                this.alpha -= this.decay;
+            }
+            draw() {
+                if (this.alpha > 0) {
+                    ctx.globalAlpha = this.alpha;
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+        }
+
+        function animate() {
+            // Clear background with deep navy color
+            ctx.globalAlpha = 1;
+            ctx.fillStyle = '#060714';
+            ctx.fillRect(0, 0, width, height);
+
+            // Draw gradient overlay
+            const gradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width);
+            gradient.addColorStop(0, '#1a103c');
+            gradient.addColorStop(1, '#060714');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+
+            // Draw normal particles
+            particles.forEach(p => { p.update(); p.draw(); });
+
+            // Draw fireworks if finale is active
+            if (finaleActive) {
+                // Randomly launch fireworks
+                if (Math.random() < 0.06) fireworks.push(new Firework());
+
+                for (let i = fireworks.length - 1; i >= 0; i--) {
+                    fireworks[i].update();
+                    fireworks[i].draw();
+                    if (fireworks[i].exploded) fireworks.splice(i, 1);
+                }
+
+                for (let i = sparkles.length - 1; i >= 0; i--) {
+                    sparkles[i].update();
+                    sparkles[i].draw();
+                    if (sparkles[i].alpha <= 0) sparkles.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Finale Cinematic Sequence
+        const s5 = document.getElementById('sec-5');
+        const overlay = document.getElementById('darken-overlay');
+        const s5pre = document.getElementById('s5-pre');
+        const s5main = document.getElementById('s5-main');
+        let finaleTriggered = false;
+
+        const finaleObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !finaleTriggered) {
+                finaleTriggered = true;
+
+                // 1. Slow down normal particles? No need, let them drift.
+
+                // 2. Darken screen dramatically
+                setTimeout(() => {
+                    overlay.style.opacity = '1';
+                }, 1000);
+
+                // 3. Fade out the "Anyway..." text
+                setTimeout(() => {
+                    s5pre.style.opacity = '0';
+
+                    // 4. Trigger HUGE Reveal
+                    setTimeout(() => {
+                        s5pre.style.display = 'none';
+                        overlay.style.opacity = '0'; // Remove darkness
+
+                        s5main.style.display = 'flex';
+                        // Force reflow
+                        void s5main.offsetWidth;
+
+                        s5main.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+
+                        // Start fireworks
+                        finaleActive = true;
+
+                        // Final hidden toast
+                        setTimeout(() => {
+                            showToast("Birthday magic successfully deployed.");
+                        }, 2000);
+
+                    }, 2500); // Wait for pre text to fade
+                }, 4000); // Dramatic pause while darkened
+
+                finaleObserver.disconnect();
+            }
+        }, { threshold: 0.6 });
+        finaleObserver.observe(s5);
+
+        // Toast messages logic (Interactive bits)
+        const toastEl = document.getElementById('toast');
+        const scrollToasts = [
+            { triggerPercent: 20, msg: "Loading emotional damage...", shown: false },
+            { triggerPercent: 45, msg: "Warning: Heart rate increasing", shown: false },
+            { triggerPercent: 75, msg: "System critically overwhelmed by cuteness", shown: false }
+        ];
+
+        function showToast(msg) {
+            toastEl.innerText = msg;
+            toastEl.style.opacity = '1';
+            setTimeout(() => { toastEl.style.opacity = '0'; }, 3500);
+        }
+
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollPos / docHeight) * 100;
+
+            scrollToasts.forEach(t => {
+                if (!t.shown && scrollPercent > t.triggerPercent) {
+                    showToast(t.msg);
+                    t.shown = true;
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>
