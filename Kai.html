@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Happy Birthday, Kai!</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts: Pixel + Clean -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --bg-0: #050612;
+            --bg-1: #07102a;
+            --neon: #00f0ff;
+            --accent: #7c5cff;
+            --text-weak: #9fb8ff;
+            --text-strong: #dff3ff;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Inter", system-ui;
+            background: linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 60%);
+            color: var(--text-strong);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Sections now scroll normally */
+        section.chapter {
+            min-height: 100vh;
+            padding: 6rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Pixel sky background */
+        .pixel-sky {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            background: radial-gradient(circle at 10% 20%,
+                    rgba(255, 255, 255, 0.06) 0px,
+                    transparent 2px),
+                radial-gradient(circle at 80% 10%,
+                    rgba(255, 255, 255, 0.04) 0px,
+                    transparent 2px),
+                radial-gradient(circle at 30% 70%,
+                    rgba(255, 255, 255, 0.03) 0px,
+                    transparent 2px),
+                linear-gradient(180deg,
+                    rgba(7, 16, 42, 0.2) 0%,
+                    rgba(5, 6, 18, 0.35) 100%);
+            animation: starShift 20s linear infinite;
+        }
+
+        @keyframes starShift {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-20px);
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .pixel-grid::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background-image: radial-gradient(circle,
+                    rgba(255, 255, 255, 0.02) 1px,
+                    transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.5;
+            animation: gridFloat 10s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes gridFloat {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .crt::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: repeating-linear-gradient(180deg,
+                    rgba(0, 0, 0, 0.03) 0px,
+                    rgba(0, 0, 0, 0.03) 1px,
+                    transparent 1px,
+                    transparent 2px);
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        .pixel {
+            font-family: "Press Start 2P", monospace;
+        }
+
+        .card {
+            width: min(1100px, 96%);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            padding: 2.4rem;
+            border: 1px solid rgba(124, 92, 255, 0.12);
+            backdrop-filter: blur(6px) saturate(120%);
+            box-shadow: 0 8px 40px rgba(3, 6, 20, 0.6);
+        }
+
+        .neon-text {
+            color: var(--neon);
+            text-shadow: 0 0 8px rgba(0, 240, 255, 0.25);
+        }
+
+        .typewriter {
+            font-family: "Press Start 2P";
+            font-size: 0.95rem;
+            color: var(--text-weak);
+        }
+
+        .cursor {
+            width: 12px;
+            height: 18px;
+            background: var(--neon);
+            animation: blink 900ms steps(2, start) infinite;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .reveal-line {
+            opacity: 0;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 20px;
+            transform: translateY(10px);
+            transition: 0.6s ease;
+        }
+
+        .reveal-line.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn-neon {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.22);
+            color: var(--neon);
+            padding: 0.7rem 1.1rem;
+            border-radius: 10px;
+            font-family: "Pixelify Sans", sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+        }
+
+        .btn-neon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 18px rgba(0, 240, 255, 0.3);
+        }
+
+        @media (max-width: 640px) {
+            .card {
+                padding: 1.4rem;
+            }
+
+            .typewriter {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+
+    <script>
+        function revealSecret() {
+            document.getElementById("secret").style.display = "block";
+            document.getElementById("revealBtn").style.display = "none";
+        }
+
+        function typeWrite(text, el, i = 0) {
+            if (i < text.length) {
+                el.innerHTML += text.charAt(i);
+                setTimeout(() => typeWrite(text, el, i + 1), 45);
+            }
+        }
+
+        window.onload = () => {
+            typeWrite(
+                "Wishing you a magical day and an incredible year ahead.",
+                document.getElementById("intro-type")
+            );
+            document.querySelectorAll(".reveal-line").forEach((el) => {
+                const obs = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((e) => {
+                            if (e.isIntersecting) e.target.classList.add("show");
+                        });
+                    },
+                    { threshold: 0.2 }
+                );
+                obs.observe(el);
+            });
+        };
+    </script>
+</head>
+
+<body class="pixel-grid crt">
+    <div class="pixel-sky"></div>
+
+    <!-- INTRO -->
+    <section class="chapter text-center">
+        <div class="card">
+            <h1 class="pixel neon-text text-3xl mb-4">HAPPY BIRTHDAYYYY KAI</h1>
+            <p id="intro-type" class="typewriter mb-3"></p>
+            <span class="cursor"></span>
+
+            <div class="mt-6">
+                <button onclick="window.scrollTo({top: window.innerHeight, behavior:'smooth'})" class="btn-neon">
+                    Next
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY I TRUST YOU -->
+    <section class="chapter">
+        <div class="card">
+            <h2 class="pixel text-cyan-300 text-xl mb-2 text-center">
+                I know you probably won't believe me but you're One of a Kind.
+            </h2>
+            <div class="space-y-3 text-purple-100/90 max-w-2xl mx-auto">
+                <p class="reveal-line">
+                    You are this cool confident and amazing human that I genuinely adore.
+                </p>
+                <p class="reveal-line">
+                    Your energy is something the world definitely needs more of.
+                </p>
+                <p class="reveal-line">
+                    I'm lucky to know someone as genuine and kind as you.
+                </p>
+                <p class="reveal-line">
+                    I'm so glad to have you around, and I do want to wish you a VERYYYYY happy
+                    birthday.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUOTES -->
+    <section class="chapter">
+        <div class="card">
+            <h2 class="pixel text-cyan-300 text-xl mb-4 text-center">
+                Wishes For Your New Year
+            </h2>
+            <div class="space-y-3 max-w-2xl mx-auto">
+                <p class="reveal-line">
+                    May your year be filled with spontaneous joy and endless laughter.
+                </p>
+                <p class="reveal-line">
+                    I hope you find beauty in the small, quiet moments.
+                </p>
+                <p class="reveal-line">You deserve a life that feels as bright as your smile.</p>
+                <p class="reveal-line">
+                    Don't ever let the world dim your sparkle, Kai.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE GRACE YOU CARRY -->
+    <section class="chapter">
+        <div class="card">
+            <h2 class="pixel text-cyan-300 text-xl mb-6 text-center">
+                The Grace You Carry
+            </h2>
+            <div class="space-y-10 text-purple-200 text-lg leading-relaxed max-w-3xl mx-auto text-center italic">
+                <div class="reveal-line">
+                    You’ve carried more than most ever see,<br>
+                    storms tucked quietly behind your smile.<br>
+                    You kept moving when it hurt to breathe,<br>
+                    kept choosing light, mile after mile.
+                </div>
+
+                <div class="reveal-line">
+                    Today isn’t just another year added on —<br>
+                    it’s proof you survived, proof you stayed.<br>
+                    Proof that everything that tried to break you<br>
+                    failed to take your kindness away.
+                </div>
+
+                <div class="reveal-line">
+                    I hope this year is gentler with you,<br>
+                    that the past loosens its grip at last.<br>
+                    I hope the weight you’ve been holding<br>
+                    learns how to become a memory, not a task.
+                </div>
+
+                <div class="reveal-line">
+                    May joy find you without effort,<br>
+                    may peace stop feeling temporary.
+                </div>
+
+                <div class="reveal-line">
+                    And on this birthday, know this much:<br>
+                    you’ve already been strong enough —<br>
+                    now you deserve to simply be happy.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECRET -->
+    <section class="chapter">
+        <div class="card text-center max-w-xl mx-auto">
+            <h3 class="pixel text-cyan-300 mb-4">A small confession</h3>
+            <p class="reveal-line">Click if you want to know</p>
+            <button id="revealBtn" onclick="revealSecret()" class="btn-neon">
+                Reveal
+            </button>
+
+            <div id="secret" class="mt-6 p-4 rounded-md border border-purple-700/20" style="display: none">
+                <p class="reveal-line">
+                    I was busy looking for a gift as cool as you... and realized nothing really compares.
+                    (Okay, I just couldn't find the right one, but you're still the best!)
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- END -->
+    <section class="chapter">
+        <div class="card text-center max-w-xl mx-auto">
+            <h4 class="pixel neon-text text-xl mb-3">Happy Birthday, Kai!</h4>
+            <p class="reveal-line">
+                This place is yours whenever you need a little boost.
+                Have the best year yet.
+            </p>
+            <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="btn-neon">
+                Back to Top
+            </button>
+            <p class="reveal-line">Made with time, stupid amount of overthinking.</p>
+        </div>
+    </section>
+</body>
+
+</html>
