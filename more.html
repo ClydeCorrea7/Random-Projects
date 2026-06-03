@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>But wait, there's more...</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@300;400;500;600;700&family=Pixelify+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        :root {
+            --bg-0: #020713;
+            --bg-1: #04172a;
+            --bg-2: #082d4c;
+            --neon-water: 180, 100%, 50%;
+            /* HSL for #00f0ff */
+            --neon-blue: 217, 91%, 60%;
+            /* HSL for #3b82f6 */
+            --neon-pink: 327, 96%, 60%;
+            /* HSL for #ec4899 */
+            --text-weak: #94a3b8;
+            --text-strong: #f8fafc;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Outfit", system-ui, -apple-system, sans-serif;
+            background: linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 50%, var(--bg-2) 100%);
+            color: var(--text-strong);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Glassmorphism Liquid Card */
+        .liquid-card {
+            background: rgba(4, 23, 42, 0.45);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            box-shadow: 0 15px 50px rgba(0, 240, 255, 0.08), inset 0 0 25px rgba(0, 240, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+        }
+
+        /* Liquid Orb Bubble Shape */
+        .liquid-orb {
+            width: min(250px, 65vw);
+            height: min(250px, 65vw);
+            background: radial-gradient(circle at 30% 30%, rgba(0, 240, 255, 0.25) 0%, rgba(59, 130, 246, 0.15) 50%, rgba(2, 7, 19, 0.5) 100%);
+            border: 2px solid rgba(0, 240, 255, 0.35);
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.2), inset 0 0 25px rgba(0, 240, 255, 0.15);
+            animation: morph-orb 8s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            user-select: none;
+        }
+
+        .liquid-orb:hover {
+            transform: scale(1.04);
+            border-color: rgba(236, 72, 153, 0.5);
+            box-shadow: 0 0 45px rgba(236, 72, 153, 0.3), inset 0 0 25px rgba(236, 72, 153, 0.2);
+            background: radial-gradient(circle at 30% 30%, rgba(236, 72, 153, 0.25) 0%, rgba(59, 130, 246, 0.15) 50%, rgba(2, 7, 19, 0.5) 100%);
+        }
+
+        @keyframes morph-orb {
+
+            0%,
+            100% {
+                border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+            }
+
+            33% {
+                border-radius: 70% 30% 52% 48% / 60% 40% 60% 40%;
+            }
+
+            66% {
+                border-radius: 50% 50% 30% 70% / 40% 60% 30% 70%;
+            }
+        }
+
+        /* SVG Underwater Turbulence */
+        .underwater-effect {
+            filter: url(#underwater-filter);
+        }
+
+        /* Glowing text elements */
+        .neon-text-water {
+            color: hsl(var(--neon-water));
+            text-shadow: 0 0 8px rgba(0, 240, 255, 0.5), 0 0 25px rgba(0, 240, 255, 0.25);
+        }
+
+        .neon-text-pink {
+            color: hsl(var(--neon-pink));
+            text-shadow: 0 0 8px rgba(236, 72, 153, 0.5), 0 0 25px rgba(236, 72, 153, 0.25);
+        }
+
+        /* Pixel style helpers */
+        .pixel {
+            font-family: "Press Start 2P", monospace;
+        }
+
+        .pixel-sans {
+            font-family: "Pixelify Sans", sans-serif;
+        }
+
+        /* Back Button */
+        .btn-water {
+            position: relative;
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            color: #93c5fd;
+            padding: 0.6rem 1.4rem;
+            border-radius: 9999px;
+            font-family: "Pixelify Sans", sans-serif;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .btn-water:hover {
+            color: #ffffff;
+            background: rgba(0, 240, 255, 0.18);
+            border-color: rgba(0, 240, 255, 0.55);
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+        }
+
+        .btn-water:active {
+            transform: translateY(1px);
+        }
+
+        /* CRT Screen Scanlines */
+        .crt::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 90;
+            background: repeating-linear-gradient(180deg,
+                    rgba(0, 0, 0, 0.08) 0px,
+                    rgba(0, 0, 0, 0.08) 1px,
+                    transparent 1px,
+                    transparent 3px);
+            opacity: 0.12;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body class="crt relative flex items-center justify-center">
+
+    <!-- WebGL-like Canvas for Liquid Ripples & Bubbles -->
+    <canvas id="water-canvas" class="fixed inset-0 w-full h-full z-0"></canvas>
+
+    <!-- SVG Filters for Underwater Wave Distortion -->
+    <svg style="position: absolute; width: 0; height: 0;">
+        <filter id="underwater-filter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="2" result="noise">
+                <animate attributeName="baseFrequency" dur="18s" values="0.012 0.02;0.015 0.025;0.012 0.02"
+                    repeatCount="indefinite" />
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+
+    <!-- INTERACTIVE WATER CONTAINER -->
+    <div class="relative z-10 w-full max-w-lg px-4 flex flex-col items-center justify-center text-center">
+
+        <!-- INTRO: INTERACTIVE ORB -->
+        <div id="orb-wrapper" class="flex flex-col items-center space-y-6">
+            <div id="liquid-orb" class="liquid-orb flex items-center justify-center p-6 text-center"
+                onclick="popOrb(event)">
+                <span
+                    class="pixel text-xs sm:text-sm text-cyan-200 leading-relaxed pointer-events-none select-none tracking-wide animate-pulse">
+                    But wait,<br>there's more...
+                </span>
+            </div>
+            <p class="pixel-sans text-slate-400 text-xs sm:text-sm animate-pulse pointer-events-none select-none">
+                Tap the liquid bubble to pop it
+            </p>
+        </div>
+
+        <!-- REVEALED CARD (HIDDEN INITIALLY) -->
+        <div id="reveal-card"
+            class="liquid-card rounded-2xl p-4 sm:p-6 max-w-[325px] sm:max-w-md w-full scale-75 opacity-0 hidden transition-all duration-700 ease-out">
+            <h2 class="pixel neon-text-water text-sm sm:text-base mb-5 tracking-wider">
+                SURPRISE! 🌊
+            </h2>
+
+            <!-- Navigation Tabs -->
+            <div class="flex border-b border-cyan-500/20 mb-5 justify-around text-xs sm:text-sm">
+                <button onclick="switchTab('wish')" id="tab-wish"
+                    class="pb-2 border-b-2 border-cyan-400 text-cyan-200 font-bold px-3 transition-all duration-300 focus:outline-none">Sea
+                    Wish</button>
+                <button onclick="switchTab('compliments')" id="tab-compliments"
+                    class="pb-2 border-b-2 border-transparent text-slate-400 px-3 transition-all duration-300 focus:outline-none">Compliments</button>
+                <button onclick="switchTab('bubble')" id="tab-bubble"
+                    class="pb-2 border-b-2 border-transparent text-slate-400 px-3 transition-all duration-300 focus:outline-none">Bubble
+                    Pop</button>
+            </div>
+
+            <!-- Tab 1: Clam Shell Wish -->
+            <div id="panel-wish" class="tab-panel block">
+                <p class="pixel-sans text-cyan-200/90 text-xs sm:text-sm leading-relaxed mb-4">
+                    Click the clam shell to draw a sea wish!
+                </p>
+                <div class="relative py-2 flex justify-center" style="perspective: 600px;">
+                    <div id="shell-glow"
+                        class="absolute w-20 h-20 rounded-full bg-cyan-400/20 blur-xl opacity-0 transition-opacity duration-700 pointer-events-none"
+                        style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+                    <svg id="clam-shell"
+                        class="w-28 h-28 cursor-pointer select-none filter drop-shadow-[0_0_15px_rgba(0,240,255,0.25)]"
+                        viewBox="0 0 100 100" onclick="openShell()">
+                        <!-- Back Shell (Bottom) -->
+                        <path d="M15,55 C15,78 30,92 50,92 C70,92 85,78 85,55 C85,52 75,52 50,52 C25,52 15,52 15,55 Z"
+                            fill="#13233c" stroke="#00f0ff" stroke-width="2" />
+                        <!-- Pearl -->
+                        <circle id="shell-pearl" cx="50" cy="62" r="7" fill="#ffffff"
+                            class="opacity-0 transition-all duration-700 filter drop-shadow-[0_0_15px_#fff]" />
+                        <!-- Front Shell (Top) -->
+                        <path id="shell-top"
+                            d="M15,55 C15,20 30,8 50,8 C70,8 85,20 85,55 C85,58 75,58 50,58 C25,58 15,58 15,55 Z"
+                            fill="#203d63" stroke="#00f0ff" stroke-width="2"
+                            style="transform-origin: 50px 58px; transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.25);" />
+                    </svg>
+                </div>
+                <div class="min-h-[50px] flex items-center justify-center mt-2">
+                    <p id="shell-message"
+                        class="pixel-sans text-cyan-200 text-[11px] sm:text-xs font-semibold italic border border-cyan-500/10 bg-cyan-950/20 p-2.5 rounded-lg max-w-xs opacity-0 scale-95 transition-all duration-500">
+                    </p>
+                </div>
+            </div>
+
+            <!-- Tab 2: Compliments -->
+            <div id="panel-compliments" class="tab-panel hidden text-left max-h-[190px] overflow-y-auto pr-2 space-y-3">
+                <div class="border-l-2 border-pink-500/40 pl-3 py-0.5">
+                    <h4 class="pixel-sans text-pink-300 font-bold text-xs">💧 DEPTH</h4>
+                    <p class="text-[11px] sm:text-xs text-slate-300">You have a quiet strength and depth that is rare
+                        and beautiful.</p>
+                </div>
+                <div class="border-l-2 border-cyan-500/40 pl-3 py-0.5">
+                    <h4 class="pixel-sans text-cyan-300 font-bold text-xs">🌊 RESILIENCE</h4>
+                    <p class="text-[11px] sm:text-xs text-slate-300">Like the ocean waves, you always rise, no matter
+                        how tough the tide gets.</p>
+                </div>
+                <div class="border-l-2 border-amber-500/40 pl-3 py-0.5">
+                    <h4 class="pixel-sans text-amber-300 font-bold text-xs">☀️ REFLECTION</h4>
+                    <p class="text-[11px] sm:text-xs text-slate-300">Your presence is like warm sunlight reflecting on
+                        the water - bright and calming.</p>
+                </div>
+                <div class="border-l-2 border-purple-500/40 pl-3 py-0.5">
+                    <h4 class="pixel-sans text-purple-300 font-bold text-xs">🐚 GENUINENESS</h4>
+                    <p class="text-[11px] sm:text-xs text-slate-300">You are as real and rare as a perfect shell found
+                        on a crowded beach.</p>
+                </div>
+            </div>
+
+            <!-- Tab 3: Bubble Pop -->
+            <div id="panel-bubble" class="tab-panel hidden">
+                <p class="pixel-sans text-slate-300 text-[11px] sm:text-xs mb-3">
+                    Pop the floating bubbles on your screen by tapping them!
+                </p>
+                <div class="bg-cyan-950/20 border border-cyan-500/10 rounded-xl p-3 flex flex-col items-center">
+                    <span class="pixel text-[8px] text-slate-400 mb-1">BUBBLES POPPED</span>
+                    <span id="pop-count" class="pixel text-xl text-cyan-300 animate-pulse">0</span>
+
+                    <div class="w-full bg-slate-900 rounded-full h-1.5 mt-3 overflow-hidden border border-cyan-500/20">
+                        <div id="pop-progress"
+                            class="bg-gradient-to-r from-cyan-400 to-pink-500 h-full w-0% transition-all duration-300">
+                        </div>
+                    </div>
+                    <span id="pop-hint" class="text-[9px] text-slate-400 mt-2">Pop 15 bubbles to unlock a secret
+                        message!</span>
+                </div>
+                <div id="pop-secret" class="hidden mt-3 p-2.5 rounded-lg border border-pink-500/20 bg-pink-950/30">
+                    <p class="pixel-sans text-pink-300 text-[10px] sm:text-xs font-semibold leading-relaxed">
+                        🎉 SECRET WISH UNLOCKED!<br><br>
+                        You are officially the Water Wizard! May your days be fluid, your heart light, and your year
+                        filled with endless ripple effects of happiness. 🌊💙
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        const canvas = document.getElementById('water-canvas');
+        const ctx = canvas.getContext('2d');
+        let bubbles = [];
+        let ripples = [];
+        let splashes = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // 1. Water Bubble Class
+        class Bubble {
+            constructor(scattered = false) {
+                this.reset(scattered);
+            }
+            reset(scattered = false) {
+                this.x = Math.random() * canvas.width;
+                this.y = scattered ? Math.random() * canvas.height : canvas.height + 30;
+                this.radius = Math.random() * 12 + 4;
+                this.speedY = Math.random() * 0.8 + 0.4;
+                this.wobbleSpeed = Math.random() * 0.02 + 0.01;
+                this.wobbleRange = Math.random() * 1.5 + 0.5;
+                this.angle = Math.random() * Math.PI * 2;
+                this.opacity = Math.random() * 0.3 + 0.25;
+            }
+            update() {
+                this.y -= this.speedY;
+                this.angle += this.wobbleSpeed;
+                this.x += Math.sin(this.angle) * this.wobbleRange * 0.3;
+
+                // Reset bubble if it rises off the top of screen
+                if (this.y < -30) {
+                    this.reset(false);
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+
+                // Bubble gradient style for 3D look
+                let gradient = ctx.createRadialGradient(
+                    this.x - this.radius * 0.3,
+                    this.y - this.radius * 0.3,
+                    this.radius * 0.1,
+                    this.x,
+                    this.y,
+                    this.radius
+                );
+                gradient.addColorStop(0, 'rgba(255, 255, 255, 0.7)');
+                gradient.addColorStop(0.2, 'rgba(0, 240, 255, 0.45)');
+                gradient.addColorStop(0.8, 'rgba(59, 130, 246, 0.15)');
+                gradient.addColorStop(1, 'rgba(0, 240, 255, 0.3)');
+
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Small highlight reflection
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.beginPath();
+                ctx.ellipse(
+                    this.x - this.radius * 0.4,
+                    this.y - this.radius * 0.4,
+                    this.radius * 0.2,
+                    this.radius * 0.1,
+                    -Math.PI / 4,
+                    0,
+                    Math.PI * 2
+                );
+                ctx.fill();
+
+                ctx.restore();
+            }
+        }
+
+        // 2. Click Water Ripple Class
+        class WaterRipple {
+            constructor(x, y, maxRadius = 140) {
+                this.x = x;
+                this.y = y;
+                this.radius = 1;
+                this.maxRadius = maxRadius;
+                this.opacity = 1.0;
+                this.speed = Math.random() * 2 + 2.5;
+            }
+            update() {
+                this.radius += this.speed;
+                this.opacity = 1.0 - (this.radius / this.maxRadius);
+            }
+            draw() {
+                ctx.save();
+                ctx.strokeStyle = `rgba(0, 240, 255, ${this.opacity})`;
+                ctx.lineWidth = Math.max(0.5, 3 * this.opacity);
+
+                // Draw ripple circle
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // Draw secondary inner ripple
+                if (this.radius > 20) {
+                    ctx.strokeStyle = `rgba(59, 130, 246, ${this.opacity * 0.5})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius - 15, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+                ctx.restore();
+            }
+        }
+
+        // 3. Splash Water Droplet Particle Class
+        class SplashParticle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.radius = Math.random() * 4 + 2;
+                this.vx = Math.random() * 6 - 3;
+                this.vy = Math.random() * -6 - 2;
+                this.gravity = 0.22;
+                this.opacity = 1.0;
+                this.fade = Math.random() * 0.02 + 0.015;
+            }
+            update() {
+                this.vy += this.gravity;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.opacity -= this.fade;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                let gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+                gradient.addColorStop(0, 'rgba(0, 240, 255, 0.8)');
+                gradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        // Initialize Bubbles
+        const bubbleCount = window.innerWidth < 768 ? 15 : 35;
+        for (let i = 0; i < bubbleCount; i++) {
+            bubbles.push(new Bubble(true));
+        }
+
+        // Animation Loop
+        function animate() {
+            // Draw background soft gradient fade
+            ctx.fillStyle = 'rgba(2, 7, 19, 0.2)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 1. Draw bubbles
+            for (let i = 0; i < bubbles.length; i++) {
+                bubbles[i].update();
+                bubbles[i].draw();
+            }
+
+            // 2. Draw ripples
+            for (let i = ripples.length - 1; i >= 0; i--) {
+                ripples[i].update();
+                if (ripples[i].radius >= ripples[i].maxRadius) {
+                    ripples.splice(i, 1);
+                } else {
+                    ripples[i].draw();
+                }
+            }
+
+            // 3. Draw splashes
+            for (let i = splashes.length - 1; i >= 0; i--) {
+                splashes[i].update();
+                if (splashes[i].opacity <= 0) {
+                    splashes.splice(i, 1);
+                } else {
+                    splashes[i].draw();
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-panel').forEach(p => {
+                p.classList.remove('block');
+                p.classList.add('hidden');
+            });
+            const activePanel = document.getElementById(`panel-${tabId}`);
+            if (activePanel) {
+                activePanel.classList.remove('hidden');
+                activePanel.classList.add('block');
+            }
+
+            document.querySelectorAll('[id^="tab-"]').forEach(btn => {
+                btn.classList.remove('border-cyan-400', 'text-cyan-200', 'font-bold');
+                btn.classList.add('border-transparent', 'text-slate-400');
+            });
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('border-transparent', 'text-slate-400');
+                activeBtn.classList.add('border-cyan-400', 'text-cyan-200', 'font-bold');
+            }
+        }
+
+        // Magical Clam Shell Wish Drawing Logic
+        const wishes = [
+            "May your waves always be calm, and your depths full of treasure. 🐚",
+            "Like a pearl, you turn every challenge into something beautiful. ✨",
+            "I hope you float through this year with absolute lightness and joy. 🌊",
+            "You deserve a tide of happy moments and sunny shores. ☀️",
+            "May your path be clear, and your dreams as vast as the open ocean. 💙",
+            "Don't forget to drift and rest. Rest is just as important as swimming. 🐬"
+        ];
+
+        function openShell() {
+            const shellTop = document.getElementById('shell-top');
+            const shellPearl = document.getElementById('shell-pearl');
+            const shellGlow = document.getElementById('shell-glow');
+            const shellMessage = document.getElementById('shell-message');
+
+            const isOpened = shellTop.style.transform === 'rotateX(-65deg)';
+
+            if (!isOpened) {
+                shellTop.style.transform = 'rotateX(-65deg)';
+                shellPearl.classList.replace('opacity-0', 'opacity-100');
+                shellGlow.classList.replace('opacity-0', 'opacity-100');
+
+                const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+                shellMessage.innerText = randomWish;
+
+                shellMessage.classList.remove('opacity-0', 'scale-95');
+                shellMessage.classList.add('opacity-100', 'scale-100');
+
+                // Explosion of splashes!
+                const rect = document.getElementById('clam-shell').getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                for (let i = 0; i < 15; i++) {
+                    splashes.push(new SplashParticle(centerX, centerY));
+                }
+            } else {
+                shellTop.style.transform = '';
+                shellPearl.classList.replace('opacity-100', 'opacity-0');
+                shellGlow.classList.replace('opacity-100', 'opacity-0');
+
+                shellMessage.classList.remove('opacity-100', 'scale-100');
+                shellMessage.classList.add('opacity-0', 'scale-95');
+            }
+        }
+
+        // Interactive Bubble Pop Game
+        let popCount = 0;
+        const targetPops = 15;
+
+        function updatePopCounter() {
+            const countEl = document.getElementById('pop-count');
+            const progressEl = document.getElementById('pop-progress');
+            const hintEl = document.getElementById('pop-hint');
+            const secretEl = document.getElementById('pop-secret');
+
+            if (countEl) countEl.innerText = popCount;
+
+            const percentage = Math.min(100, (popCount / targetPops) * 100);
+            if (progressEl) progressEl.style.width = percentage + '%';
+
+            if (popCount >= targetPops) {
+                if (hintEl) hintEl.innerText = "Secret unlocked! 🎉";
+                if (secretEl) {
+                    secretEl.classList.remove('hidden');
+                    secretEl.classList.add('block');
+                }
+            } else {
+                if (hintEl) hintEl.innerText = `Pop ${targetPops - popCount} more bubbles to unlock a secret message!`;
+            }
+        }
+
+        // Click/Touch Listener to check bubble popping & standard ripples
+        function checkBubblePop(e) {
+            const x = e.clientX || (e.touches && e.touches[0].clientX);
+            const y = e.clientY || (e.touches && e.touches[0].clientY);
+            if (!x || !y) return;
+
+            let popped = false;
+            // Scan bubbles backward (pop uppermost first)
+            for (let i = bubbles.length - 1; i >= 0; i--) {
+                const b = bubbles[i];
+                const dist = Math.hypot(x - b.x, y - b.y);
+                // Click bounding buffer (+15px) for easy touch screen popping
+                if (dist < b.radius + 15) {
+                    popped = true;
+                    // Sparkles and ripple at pop coordinates
+                    for (let p = 0; p < 8; p++) {
+                        splashes.push(new SplashParticle(b.x, b.y));
+                    }
+                    ripples.push(new WaterRipple(b.x, b.y, 40));
+
+                    bubbles.splice(i, 1);
+                    bubbles.push(new Bubble(false));
+
+                    popCount++;
+                    updatePopCounter();
+                    break;
+                }
+            }
+
+            if (!popped) {
+                ripples.push(new WaterRipple(x, y));
+                if (Math.random() > 0.6) {
+                    bubbles.push(new Bubble());
+                }
+            }
+        }
+
+        window.addEventListener('click', checkBubblePop);
+        window.addEventListener('touchmove', (e) => {
+            if (Math.random() > 0.85) {
+                const x = e.touches[0].clientX;
+                const y = e.touches[0].clientY;
+                ripples.push(new WaterRipple(x, y, 70));
+            }
+        });
+
+        // Bubble Pop Action
+        function popOrb(e) {
+            e.stopPropagation();
+            const orb = document.getElementById('liquid-orb');
+            const wrapper = document.getElementById('orb-wrapper');
+            const card = document.getElementById('reveal-card');
+
+            // Find center of orb
+            const rect = orb.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+
+            // Large splash explosion
+            for (let i = 0; i < 40; i++) {
+                splashes.push(new SplashParticle(x, y));
+            }
+            // Dynamic extra ripples
+            ripples.push(new WaterRipple(x, y, 220));
+            ripples.push(new WaterRipple(x, y, 160));
+
+            // Morph orb smaller and fade out
+            orb.style.transform = 'scale(0)';
+            orb.style.opacity = '0';
+
+            setTimeout(() => {
+                wrapper.classList.add('hidden');
+
+                // Show card with smooth animation
+                card.classList.remove('hidden');
+                // Trigger reflow
+                card.offsetHeight;
+                card.classList.remove('scale-75', 'opacity-0');
+                card.classList.add('scale-100', 'opacity-100');
+            }, 400);
+        }
+    </script>
+</body>
+
+</html>
