@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Sunflower 🌻</title>
+    <!-- Google Fonts: Caveat for handwriting, Lora for warm serif body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* --- DESIGN SYSTEM & CSS VARIABLES --- */
+        :root {
+            --bg-base: #FAF6EF;
+            /* warm cream paper background */
+            --bg-card: #FDFBF7;
+            /* brighter card paper */
+            --bg-dark: #0B1220;
+            /* deep starry night navy */
+            --text-primary: #3E2F25;
+            /* pencil carbon brown */
+            --text-muted: #6E5C4F;
+            /* soft charcoal pencil */
+            --accent-burgundy: #722F37;
+            /* dried rose red */
+            --accent-yellow: #F2B705;
+            /* sunflower golden yellow */
+            --accent-tape: rgba(239, 226, 194, 0.55);
+            /* masking tape color */
+
+            --font-serif: 'Lora', Georgia, serif;
+            --font-hand: 'Caveat', cursive;
+        }
+
+        /* --- BASE STYLES --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-base);
+            font-family: var(--font-serif);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        body {
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        /* Custom scrollbar to look like a pencil path */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+            border-radius: 4px;
+        }
+
+        /* Generic Helper Classes */
+        .handwritten {
+            font-family: var(--font-hand);
+            font-weight: 700;
+        }
+
+        .highlight-yellow {
+            background: linear-gradient(120deg, rgba(242, 183, 5, 0.3) 0%, rgba(242, 183, 5, 0.4) 100%);
+            padding: 0 4px;
+            border-radius: 2px;
+        }
+
+        .crossed-out {
+            text-decoration: line-through;
+            text-decoration-color: var(--accent-burgundy);
+            text-decoration-thickness: 2px;
+            color: var(--text-muted);
+        }
+
+        /* SVG Doodle Containers */
+        .doodle {
+            position: absolute;
+            pointer-events: none;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 0.75;
+        }
+
+        /* Scotch Tape CSS Simulation */
+        .tape {
+            position: absolute;
+            background: var(--accent-tape);
+            backdrop-filter: blur(1px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+            border-left: 1px dashed rgba(0, 0, 0, 0.08);
+            border-right: 1px dashed rgba(0, 0, 0, 0.08);
+            pointer-events: none;
+            z-index: 10;
+            /* Jagged border clipping path */
+            clip-path: polygon(0% 8%, 6% 0%, 12% 7%, 18% 0%, 24% 8%, 30% 0%, 36% 7%, 42% 0%, 48% 8%, 54% 0%, 60% 7%, 66% 0%, 72% 8%, 78% 0%, 84% 7%, 90% 0%, 96% 8%, 100% 1%,
+                    100% 92%, 94% 100%, 88% 93%, 82% 100%, 76% 92%, 70% 100%, 64% 93%, 58% 100%, 52% 92%, 46% 100%, 40% 93%, 34% 100%, 28% 92%, 22% 100%, 16% 93%, 10% 100%, 4% 92%, 0% 99%);
+        }
+
+        /* Paper Tear separator (SVG-based path) */
+        .paper-tear {
+            width: 100%;
+            height: 40px;
+            background-color: var(--bg-base);
+            position: relative;
+            z-index: 5;
+        }
+
+        /* Page Layout */
+        section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        /* Mobile Container Restraints (Optimized for 360px–430px) */
+        .container {
+            width: 100%;
+            max-width: 410px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+
+        /* ==========================================
+           SECTION 1: LANDING PAGE (CURIOSITY)
+           ========================================== */
+        #landing {
+            background-color: var(--bg-base);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .notebook-cover {
+            background-color: var(--bg-card);
+            border: 2px solid #E6DEC9;
+            box-shadow: 0 10px 25px rgba(62, 47, 37, 0.08);
+            border-radius: 6px;
+            width: 100%;
+            padding: 40px 25px;
+            position: relative;
+            transform: rotate(-1deg);
+        }
+
+        .notebook-spine {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 15px;
+            background: linear-gradient(to right, rgba(62, 47, 37, 0.15), transparent);
+            border-right: 1px dashed rgba(62, 47, 37, 0.1);
+        }
+
+        .landing-text {
+            font-size: 22px;
+            margin-bottom: 25px;
+            min-height: 35px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            color: var(--text-primary);
+        }
+
+        .landing-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .landing-text span {
+            color: var(--accent-burgundy);
+        }
+
+        .enter-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background-color: var(--accent-yellow);
+            color: var(--text-primary);
+            border: none;
+            outline: none;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(242, 183, 5, 0.25);
+            font-size: 18px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .enter-btn.visible {
+            opacity: 1;
+            transform: scale(1) rotate(2deg);
+        }
+
+        .enter-btn:active {
+            transform: scale(0.95) rotate(1deg);
+        }
+
+        /* ==========================================
+           SECTION 2: SONG LYRICS (WARMTH)
+           ========================================== */
+        #lyrics {
+            background-color: var(--bg-base);
+        }
+
+        .notebook-paper {
+            background-image:
+                linear-gradient(90deg, rgba(220, 80, 80, 0.25) 0px, rgba(220, 80, 80, 0.25) 2px, transparent 2px),
+                linear-gradient(rgba(100, 150, 240, 0.15) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 28px;
+            background-position: 40px 0, 0 8px;
+            background-color: var(--bg-card);
+            border: 1px solid #E6DEC9;
+            border-radius: 3px;
+            box-shadow: 0 6px 18px rgba(62, 47, 37, 0.05);
+            padding: 30px 20px 30px 55px;
+            position: relative;
+            min-height: 480px;
+        }
+
+        .coffee-stain {
+            position: absolute;
+            right: 15px;
+            top: 25px;
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgba(139, 90, 43, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .coffee-stain::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid rgba(139, 90, 43, 0.05);
+            border-radius: 50%;
+        }
+
+        .lyrics-title {
+            font-size: 26px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .lyrics-subtitle {
+            font-size: 14px;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+            line-height: 1.3;
+        }
+
+        .lyric-stanza {
+            margin-bottom: 28px;
+        }
+
+        .lyric-line {
+            font-size: 17px;
+            line-height: 28px;
+            /* sync with blue lines */
+            min-height: 28px;
+            opacity: 0.15;
+            transform: translateY(5px);
+            transition: opacity 0.6s ease, transform 0.6s ease, color 0.3s ease;
+        }
+
+        .lyric-line.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .lyric-line.highlighted {
+            color: var(--accent-burgundy);
+            font-weight: 600;
+        }
+
+
+        /* ==========================================
+           SECTION 3: POETRY SECTION (WARMTH/EXPLORATION)
+           ========================================== */
+        #poetry {
+            background-color: var(--bg-base);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            font-family: var(--font-hand);
+            font-size: 20px;
+            color: var(--accent-burgundy);
+        }
+
+        .envelope-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+        }
+
+        .envelope {
+            background-color: #EFE9D9;
+            border: 1px solid #DFD7C0;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 20px;
+            min-height: 75px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: var(--accent-burgundy);
+            opacity: 0.6;
+        }
+
+        .envelope-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .envelope-status {
+            font-family: var(--font-hand);
+            font-size: 16px;
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+        }
+
+        .poem-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, margin-top 0.4s ease;
+            margin-top: 0;
+            padding-left: 5px;
+            border-left: 2px dashed rgba(114, 47, 55, 0.25);
+        }
+
+        .envelope.open {
+            background-color: var(--bg-card);
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(62, 47, 37, 0.08);
+            border-color: #E2DAC4;
+        }
+
+        .envelope.open .envelope-status {
+            transform: rotate(90deg);
+            color: var(--accent-burgundy);
+        }
+
+        .envelope.open .poem-content {
+            max-height: 1200px;
+            opacity: 1;
+            margin-top: 15px;
+        }
+
+        .poem-stanza {
+            margin-bottom: 16px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .poem-stanza:last-child {
+            margin-bottom: 0;
+        }
+
+
+        /* ==========================================
+           SECTION 4: COMPLIMENTS SECTION (WARMTH/VULNERABILITY)
+           ========================================== */
+        #compliments {
+            background-color: var(--bg-base);
+        }
+
+        .board-tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            gap: 8px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: #EFE9D9;
+            border: 1px solid #DFD7C0;
+            padding: 10px 5px;
+            font-family: var(--font-hand);
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            text-align: center;
+            color: var(--text-muted);
+            position: relative;
+        }
+
+        .tab-btn.active {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transform: translateY(-3px) rotate(-1deg);
+            border-color: var(--accent-yellow);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 15%;
+            right: 15%;
+            height: 3px;
+            background: var(--accent-yellow);
+            border-radius: 2px;
+        }
+
+        .board-content {
+            min-height: 310px;
+            position: relative;
+            width: 100%;
+        }
+
+        .sticky-card {
+            background-color: #FFFDE7;
+            /* light yellow post-it */
+            border-radius: 2px;
+            box-shadow: 2px 6px 15px rgba(62, 47, 37, 0.07);
+            padding: 24px;
+            position: relative;
+            transform: rotate(1deg);
+            display: none;
+            animation: stickyPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .sticky-card.active {
+            display: block;
+        }
+
+        .sticky-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(135deg, transparent 50%, rgba(0, 0, 0, 0.03) 50%, rgba(0, 0, 0, 0.06) 100%);
+            box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        @keyframes stickyPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) rotate(-3deg);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(1deg);
+            }
+        }
+
+        .sticky-card-content {
+            font-family: var(--font-hand);
+            font-size: 21px;
+            line-height: 1.5;
+            color: #4A3B32;
+        }
+
+        .sticky-bullet {
+            margin-bottom: 18px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .sticky-bullet::before {
+            content: '🌻';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 15px;
+        }
+
+        .sticky-bullet:last-child {
+            margin-bottom: 0;
+        }
+
+
+        /* ==========================================
+           SECTION 5: CONSTELLATION SECTION (VULNERABILITY)
+           ========================================== */
+        /* Smooth gradient transition to dark sky */
+        .sky-transition {
+            height: 180px;
+            background: linear-gradient(to bottom, var(--bg-base) 0%, #080D1A 100%);
+            width: 100%;
+            position: relative;
+        }
+
+        #constellation-section {
+            background-color: var(--bg-dark);
+            color: #E2E8F0;
+            padding-top: 10px;
+            padding-bottom: 80px;
+        }
+
+        .sky-header {
+            text-align: center;
+            margin-bottom: 30px;
+            z-index: 10;
+        }
+
+        .sky-header h2 {
+            font-size: 24px;
+            color: #FFFFFF;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            margin-bottom: 8px;
+        }
+
+        .sky-header p {
+            font-family: var(--font-hand);
+            font-size: 20px;
+            color: var(--accent-yellow);
+        }
+
+        .canvas-container {
+            width: 100%;
+            height: 380px;
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.4);
+            margin-bottom: 25px;
+        }
+
+        /* SVG Star Maps overlay */
+        .star-map-svg {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        /* Star styling */
+        .constellation-star {
+            cursor: pointer;
+            transition: r 0.2s ease, filter 0.2s ease;
+        }
+
+        .constellation-star:hover,
+        .constellation-star.active {
+            filter: drop-shadow(0 0 8px #FFF) drop-shadow(0 0 12px var(--accent-yellow));
+        }
+
+        .constellation-line {
+            stroke: rgba(255, 255, 255, 0.12);
+            stroke-dasharray: 4;
+            transition: stroke 0.4s ease, stroke-width 0.4s ease;
+        }
+
+        .constellation-line.active {
+            stroke: rgba(242, 183, 5, 0.65);
+            stroke-width: 1.5;
+            stroke-dasharray: 0;
+            animation: drawLine 1s ease-out forwards;
+        }
+
+        /* Constellation click targets */
+        .constellation-group {
+            pointer-events: bounding-box;
+            cursor: pointer;
+        }
+
+        .constellation-label {
+            font-family: var(--font-hand);
+            font-size: 15px;
+            fill: rgba(255, 255, 255, 0.4);
+            pointer-events: none;
+            transition: fill 0.3s ease, font-size 0.3s ease;
+            text-anchor: middle;
+        }
+
+        .constellation-group:hover .constellation-label,
+        .constellation-group.active .constellation-label {
+            fill: var(--accent-yellow);
+            font-size: 17px;
+        }
+
+        /* Star note panel */
+        .star-note {
+            background-color: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(242, 183, 5, 0.3);
+            border-radius: 6px;
+            padding: 20px;
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none;
+        }
+
+        .star-note.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .star-note-title {
+            font-size: 17px;
+            color: var(--accent-yellow);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .star-note-text {
+            font-family: var(--font-hand);
+            font-size: 18px;
+            color: #E2E8F0;
+            line-height: 1.4;
+        }
+
+        /* Ambient glowing background particles */
+        .twinkle-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #FFF;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: twinkle 4s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 0.9;
+            }
+        }
+
+        /* ==========================================
+           SECTION 6: FINAL CONFESSION (EMOTIONAL BURST)
+           ========================================== */
+        #confession-section {
+            background-color: var(--bg-dark);
+            min-height: 100vh;
+            color: #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            transition: background-color 2.5s ease;
+            overflow: hidden;
+        }
+
+        /* Clean transition style when confession starts */
+        #confession-section.fade-to-burgundy {
+            background-color: #2D0B12;
+            /* warm deep burgundy */
+        }
+
+        .confession-container {
+            width: 100%;
+            max-width: 410px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 380px;
+            position: relative;
+        }
+
+        /* The minimalist interactive sunflower */
+        .sunflower-trigger {
+            width: 120px;
+            height: 120px;
+            cursor: pointer;
+            position: relative;
+            z-index: 20;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
+            filter: drop-shadow(0 0 5px rgba(242, 183, 5, 0.2));
+            animation: breathing 3s ease-in-out infinite;
+        }
+
+        .sunflower-trigger:active {
+            transform: scale(0.9);
+        }
+
+        .sunflower-trigger.clicked {
+            animation: spinAndGrow 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            pointer-events: none;
+        }
+
+        @keyframes breathing {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px rgba(242, 183, 5, 0.2));
+            }
+
+            50% {
+                transform: scale(1.06);
+                filter: drop-shadow(0 0 15px rgba(242, 183, 5, 0.5));
+            }
+        }
+
+        @keyframes spinAndGrow {
+            0% {
+                transform: scale(1.06) rotate(0deg);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.3) rotate(180deg);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(0.8) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Confession Text Sequencer */
+        .confession-story {
+            font-size: 20px;
+            font-style: italic;
+            color: #F8FAFC;
+            min-height: 80px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0 20px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+            position: absolute;
+            top: 55%;
+        }
+
+        .confession-story.show {
+            opacity: 1;
+        }
+
+        /* Final Burst Screen */
+        .final-reveal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 2s ease, visibility 2s ease;
+            z-index: 30;
+            padding: 20px;
+        }
+
+        .final-reveal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .final-text {
+            font-size: 34px;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3), 0 0 30px rgba(242, 183, 5, 0.4);
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        .final-doodle {
+            width: 70px;
+            height: 70px;
+            stroke: var(--accent-yellow);
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            25% {
+                transform: scale(1.1);
+            }
+
+            40% {
+                transform: scale(1.05);
+            }
+
+            60% {
+                transform: scale(1.15);
+            }
+        }
+
+        .restart-btn {
+            margin-top: 40px;
+            background: transparent;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.5);
+            font-family: var(--font-hand);
+            font-size: 16px;
+            padding: 8px 18px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            color: var(--accent-yellow);
+            border-color: var(--accent-yellow);
+        }
+
+        .tap-prompt {
+            font-family: var(--font-hand);
+            font-size: 18px;
+            color: var(--accent-yellow);
+            margin-top: 15px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .tap-prompt.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==========================================
+       SECTION 1: LANDING PAGE
+       ========================================== -->
+    <section id="landing">
+        <div class="container">
+            <!-- Jagged tape details -->
+            <div class="tape" style="width: 100px; height: 30px; top: -15px; left: 10%; transform: rotate(-5deg);">
+            </div>
+            <div class="tape" style="width: 90px; height: 30px; bottom: -15px; right: 15%; transform: rotate(3deg);">
+            </div>
+
+            <!-- Sketchbook Cover card -->
+            <div class="notebook-cover">
+                <div class="notebook-spine"></div>
+
+                <!-- Hand-drawn heart doodle top right -->
+                <svg class="doodle"
+                    style="color: var(--accent-burgundy); right: 20px; top: 20px; width: 40px; height: 40px;"
+                    viewBox="0 0 24 24">
+                    <path
+                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+
+                <div class="landing-text" id="text-1">Uh… hi.</div>
+                <div class="landing-text" id="text-2">I made something for you.</div>
+                <div class="landing-text" id="text-3">Please be gentle,</div>
+                <div class="landing-text" id="text-4">I <span>embarrass</span> easily.</div>
+
+                <button class="enter-btn handwritten" id="enter-btn">
+                    open this page
+                    <!-- Hand-drawn arrow doodle under the button -->
+                    <svg class="doodle"
+                        style="color: var(--text-primary); bottom: -20px; left: 10px; width: 80px; height: 20px;"
+                        viewBox="0 0 100 20">
+                        <path d="M5,10 Q50,18 90,5 M80,2 C85,3 90,5 92,7 C88,9 82,13 80,15" fill="none"
+                            stroke="currentColor" stroke-width="1.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       SECTION 2: SONG LYRICS
+       ========================================== -->
+    <section id="lyrics">
+        <div class="container">
+            <!-- Sketchy tape on top edge of notebook -->
+            <div class="tape"
+                style="width: 110px; height: 32px; top: -16px; left: 35%; transform: rotate(-1deg); opacity: 0.8;">
+            </div>
+
+            <div class="notebook-paper">
+                <div class="coffee-stain"></div>
+
+                <div class="lyrics-title handwritten">Not Fair</div>
+                <div class="lyrics-subtitle">"I wrote this but I'm too shy to sing it."</div>
+
+                <!-- Verse 1 -->
+                <div class="lyric-stanza">
+                    <div class="lyric-line">You showed me your eyes like it was nothing,</div>
+                    <div class="lyric-line">Like that’s a normal thing to do.</div>
+                    <div class="lyric-line">Do you have any idea what happened</div>
+                    <div class="lyric-line">To my poor brain because of you?</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">Like seriously, who gave you permission</div>
+                    <div class="lyric-line">To look that pretty and act unaware?</div>
+                    <div class="lyric-line">You broke something, I’m being honest,</div>
+                    <div class="lyric-line">And no, before you ask, it’s not repaired.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">I had composure, I had a script ready,</div>
+                    <div class="lyric-line">I had cool lines I could’ve said.</div>
+                    <div class="lyric-line">Then you looked at me for two damn seconds,</div>
+                    <div class="lyric-line">And boom. Congratulations. <span class="highlight-yellow">Face turned
+                            red</span>.</div>
+                </div>
+
+                <!-- Pre-Chorus -->
+                <div class="lyric-stanza">
+                    <div class="lyric-line">I had a hundred things prepared,</div>
+                    <div class="lyric-line">Rehearsed them too, because I cared.</div>
+                    <div class="lyric-line">Then you said hi so casually,</div>
+                    <div class="lyric-line">And every word abandoned me.</div>
+                </div>
+
+                <!-- Chorus -->
+                <div class="lyric-stanza">
+                    <div class="lyric-line highlighted">I hate how shy you make me.</div>
+                    <div class="lyric-line">This really isn’t fair,</div>
+                    <div class="lyric-line">Why do you always stare?</div>
+                    <div class="lyric-line">You know I can’t prepare</div>
+                    <div class="lyric-line">When you’re just standing there.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">This really isn’t fair,</div>
+                    <div class="lyric-line">You’ve got me so impaired.</div>
+                    <div class="lyric-line">I’m fine with everyone else,</div>
+                    <div class="lyric-line">Then you and I’m just scared.</div>
+                </div>
+
+                <!-- Verse 2 -->
+                <div class="lyric-stanza">
+                    <div class="lyric-line">And no, I’m not like this with others,</div>
+                    <div class="lyric-line">I swear I’m normal, ask around.</div>
+                    <div class="lyric-line">I talk just fine, I joke, I function,</div>
+                    <div class="lyric-line">My feet stay firmly on the ground.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">I’m mostly sane… okay, debatable,</div>
+                    <div class="lyric-line">But still, I’m usually alright.</div>
+                    <div class="lyric-line">Then somehow you just say one sentence,</div>
+                    <div class="lyric-line">And now my brain forgot its rights.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">I overthink before I text you,</div>
+                    <div class="lyric-line">Rewrite replies like twenty times.</div>
+                    <div class="lyric-line"><del class="crossed-out">Delete. Rephrase.</del> No, that sounds stupid.
+                    </div>
+                    <div class="lyric-line">Why is speaking to you a crime?</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">And when you laugh? Great. Thanks. Amazing.</div>
+                    <div class="lyric-line">Now all coherent thought is gone.</div>
+                    <div class="lyric-line">My brain just leaves without a warning,</div>
+                    <div class="lyric-line">Rude, honestly, but carries on.</div>
+                </div>
+
+                <!-- Pre-Chorus 2 -->
+                <div class="lyric-stanza">
+                    <div class="lyric-line">I tell myself, “Just act the same.</div>
+                    <div class="lyric-line">Be cool for once. Don’t glitch again.”</div>
+                    <div class="lyric-line">Then you get close and suddenly</div>
+                    <div class="lyric-line">I lose that fight embarrassingly.</div>
+                </div>
+
+                <!-- Chorus 2 -->
+                <div class="lyric-stanza">
+                    <div class="lyric-line highlighted">I hate how shy you make me.</div>
+                    <div class="lyric-line">This really isn’t fair,</div>
+                    <div class="lyric-line">Why do you always stare?</div>
+                    <div class="lyric-line">You know I can’t prepare</div>
+                    <div class="lyric-line">When you’re just standing there.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">This really isn’t fair,</div>
+                    <div class="lyric-line">You’ve got me so impaired.</div>
+                    <div class="lyric-line">I’m fine with everyone else,</div>
+                    <div class="lyric-line">Then you and I’m just scared.</div>
+                </div>
+
+                <!-- Bridge -->
+                <div class="lyric-stanza">
+                    <div class="lyric-line">Okay, fine.</div>
+                    <div class="lyric-line">Here’s the stupid truth.</div>
+                    <div class="lyric-line">I don’t know what the hell you do.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">I complain a lot, I blame your eyes,</div>
+                    <div class="lyric-line">Your smile, your voice, your dumb replies.</div>
+                    <div class="lyric-line">I act annoyed, I roll my eyes,</div>
+                    <div class="lyric-line">Pretend I’ve seen through your disguise.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">But truth?</div>
+                    <div class="lyric-line highlighted">You scare me.</div>
+                    <div class="lyric-line">Not in a bad way.</div>
+                    <div class="lyric-line">In a terrifyingly soft way.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">Because I’m used to words.</div>
+                    <div class="lyric-line">I write. I talk. I joke.</div>
+                    <div class="lyric-line">I turn feelings into poems, songs, stupid little things.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">But you…</div>
+                    <div class="lyric-line">You make all of that feel small.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">And I hate the blush.</div>
+                    <div class="lyric-line">I hate the nerves.</div>
+                    <div class="lyric-line">I hate the way my thoughts all swerve.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">I hate the rush.</div>
+                    <div class="lyric-line">I hate the heat.</div>
+                    <div class="lyric-line">I hate how loud you make my heartbeat.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">I hate that one small look from you</div>
+                    <div class="lyric-line">Can wreck my calm completely through.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">...</div>
+                    <div class="lyric-line">But if I’m honest?</div>
+                    <div class="lyric-line">I think what scares me most is this.</div>
+                    <div class="lyric-line">I don’t actually want it to stop.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">Because if being a flustered, awkward, blushing idiot</div>
+                    <div class="lyric-line">is what happens when it’s you…</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">Then maybe…</div>
+                    <div class="lyric-line highlighted">maybe I don’t mind being this version of me.</div>
+                </div>
+
+                <!-- Final Chorus -->
+                <div class="lyric-stanza">
+                    <div class="lyric-line highlighted">I hate how shy you make me.</div>
+                    <div class="lyric-line">This really isn’t fair,</div>
+                    <div class="lyric-line">Why do you always stare?</div>
+                    <div class="lyric-line">You know I can’t prepare</div>
+                    <div class="lyric-line">When you’re just standing there.</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">This really isn’t fair,</div>
+                    <div class="lyric-line">Yet somehow I still care.</div>
+                    <div class="lyric-line">I hate what you’ve done to me…</div>
+                </div>
+
+                <div class="lyric-stanza">
+                    <div class="lyric-line">…</div>
+                    <div class="lyric-line">But please don’t stop.</div>
+                    <div class="lyric-line highlighted">I kinda like you there.</div>
+                </div>
+
+                <!-- Hand drawn flower doodle bottom right -->
+                <svg class="doodle"
+                    style="color: var(--accent-yellow); bottom: 15px; right: 15px; width: 65px; height: 65px;"
+                    viewBox="0 0 64 64">
+                    <!-- stem -->
+                    <path d="M32,40 Q30,52 28,60 M28,48 Q20,44 24,40 M30,54 Q38,52 36,46" />
+                    <!-- center -->
+                    <circle cx="32" cy="32" r="7" fill="var(--text-primary)" />
+                    <!-- petals -->
+                    <path
+                        d="M32,25 Q35,16 32,10 Q29,16 32,25 M32,39 Q35,48 32,54 Q29,48 32,39 M25,32 Q16,29 10,32 Q16,35 25,32 M39,32 Q48,29 54,32 Q48,35 39,32 M27,27 Q18,18 24,14 Q27,21 27,27 M37,37 Q46,46 40,50 Q37,43 37,37 M37,27 Q46,18 40,14 Q37,21 37,27 M27,37 Q18,46 24,50 Q27,43 27,37" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       SECTION 3: POETRY SECTION
+       ========================================== */ -->
+    <section id="poetry">
+        <div class="container">
+            <div class="section-header">
+                <h2>Folded Letters</h2>
+                <p>Private journal pages I wasn't supposed to show you...</p>
+            </div>
+
+            <div class="envelope-container">
+                <!-- Poem 1 -->
+                <div class="envelope" onclick="togglePoem(this)">
+                    <div class="envelope-title">
+                        <span>Your Eyes Are Unfair</span>
+                        <span class="envelope-status">➔</span>
+                    </div>
+                    <div class="poem-content">
+                        <div class="poem-stanza">
+                            You showed me your eyes so casually,<br>
+                            As if that should not affect me at all.<br>
+                            Like stars were meant for ordinary viewing,<br>
+                            Not things that make my whole brain stall.
+                        </div>
+                        <div class="poem-stanza">
+                            It’s honestly kind of unfair of you,<br>
+                            To look that pretty and act unaware.<br>
+                            How am I meant to stay composed<br>
+                            When galaxies decide to stare?
+                        </div>
+                        <div class="poem-stanza">
+                            I try to look for just a second,<br>
+                            Then panic pulls my gaze elsewhere.<br>
+                            Not ’cause I do not want to stay,<br>
+                            I simply cannot survive in there.
+                        </div>
+                        <div class="poem-stanza">
+                            So if I look away too quickly,<br>
+                            Please don’t think I do not care.<br>
+                            I’m only trying to stay alive.<br>
+                            Your eyes, respectfully, are unfair.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Poem 2 -->
+                <div class="envelope" onclick="togglePoem(this)">
+                    <div class="envelope-title">
+                        <span>I Hate How Shy You Make Me</span>
+                        <span class="envelope-status">➔</span>
+                    </div>
+                    <div class="poem-content">
+                        <div class="poem-stanza">
+                            Mujhe samajh nahi aata, seriously,<br>
+                            Aap aisa mere saath kyun karti hain?<br>
+                            Aapko andaza bhi hai shayad<br>
+                            Aap mujhe kya bana deti hain?
+                        </div>
+                        <div class="poem-stanza">
+                            Main sabse normally baat kar leta hoon,<br>
+                            Log bolenge, “haan, yeh theek hi hai.”<br>
+                            Main function karta hoon, main sane bhi hoon...<br>
+                            Mostly. Baaki woh alag baat hi hai.
+                        </div>
+                        <div class="poem-stanza">
+                            Phir aap aati hain, ek smile deti hain,<br>
+                            Aur mera system crash ho jaata hai.<br>
+                            Brain bina notice leave pe chala jaata,<br>
+                            Confidence bhi saath le jaata hai.
+                        </div>
+                        <div class="poem-stanza">
+                            Toh haan, meri ek complaint hai:<br>
+                            Yeh sab honestly not fair hi hai.<br>
+                            I hate how shy you make me…<br>
+                            Aur shayad… mujhe yeh pasand bhi hai.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Poem 3 -->
+                <div class="envelope" onclick="togglePoem(this)">
+                    <div class="envelope-title">
+                        <span>Sunflower Theory</span>
+                        <span class="envelope-status">➔</span>
+                    </div>
+                    <div class="poem-content">
+                        <div class="poem-stanza">
+                            I called you sunflower<br>
+                            because warmth felt like the closest word to you.
+                        </div>
+                        <div class="poem-stanza">
+                            Because you carry something bright,<br>
+                            something gentle,<br>
+                            something quietly alive.
+                        </div>
+                        <div class="poem-stanza">
+                            You feel like light<br>
+                            without trying to be.
+                        </div>
+                        <div class="poem-stanza">
+                            But I think I got something wrong.
+                        </div>
+                        <div class="poem-stanza">
+                            I kept calling you sunflower<br>
+                            until I realized…
+                        </div>
+                        <div class="poem-stanza">
+                            maybe I’m the sunflower.
+                        </div>
+                        <div class="poem-stanza">
+                            Because I keep turning toward you.
+                        </div>
+                        <div class="poem-stanza">
+                            Every conversation.<br>
+                            Every message.<br>
+                            Every tiny moment.
+                        </div>
+                        <div class="poem-stanza">
+                            Some part of me<br>
+                            keeps leaning your way.
+                        </div>
+                        <div class="poem-stanza">
+                            And maybe that’s what scared me.
+                        </div>
+                        <div class="poem-stanza">
+                            Not that you shine.
+                        </div>
+                        <div class="poem-stanza">
+                            But that I had already started<br>
+                            orienting myself around your warmth<br>
+                            without even noticing.
+                        </div>
+                        <div class="poem-stanza">
+                            And somehow…<br>
+                            that does not terrify me<br>
+                            as much as it should.
+                        </div>
+                        <div class="poem-stanza">
+                            Because if I’m going to grow toward something,
+                        </div>
+                        <div class="poem-stanza">
+                            I’m glad<br>
+                            it’s you.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Poem 4 -->
+                <div class="envelope" onclick="togglePoem(this)">
+                    <div class="envelope-title">
+                        <span>Things I Don’t Say</span>
+                        <span class="envelope-status">➔</span>
+                    </div>
+                    <div class="poem-content">
+                        <div class="poem-stanza">
+                            Kuch baatein hain<br>
+                            jo main aapse keh nahi pata.
+                        </div>
+                        <div class="poem-stanza">
+                            Nahi isliye nahi<br>
+                            ki mere paas words nahi hain.
+                        </div>
+                        <div class="poem-stanza">
+                            Words toh mere paas bohot hain.
+                        </div>
+                        <div class="poem-stanza">
+                            Main poems likhta hoon.<br>
+                            Gaane likhta hoon.<br>
+                            Poore paragraphs likh sakta hoon.
+                        </div>
+                        <div class="poem-stanza">
+                            Par aapke saamne…
+                        </div>
+                        <div class="poem-stanza">
+                            Pata nahi.
+                        </div>
+                        <div class="poem-stanza">
+                            Sab chhota lagne lagta hai.
+                        </div>
+                        <div class="poem-stanza">
+                            Main kehna chahta hoon<br>
+                            ki aap achhi lagti hain.
+                        </div>
+                        <div class="poem-stanza">
+                            Ki aapki aankhein dangerous hain.<br>
+                            Ki aap haste hain toh mera din better ho jaata hai.<br>
+                            Ki aap mujhe stupid tareeke se shy bana deti hain.
+                        </div>
+                        <div class="poem-stanza">
+                            Ki mujhe aap pasand hain.
+                        </div>
+                        <div class="poem-stanza">
+                            Bohot.
+                        </div>
+                        <div class="poem-stanza">
+                            Par phir sochta hoon…<br>
+                            Kya yeh kehna chahiye?<br>
+                            Kya chup rehna better hai?<br>
+                            Kya aap already jaanti hain?
+                        </div>
+                        <div class="poem-stanza">
+                            Isliye main jokes karta hoon.<br>
+                            Tease karta hoon.<br>
+                            Complain karta hoon.
+                        </div>
+                        <div class="poem-stanza">
+                            Jaise sab mazaak ho.
+                        </div>
+                        <div class="poem-stanza">
+                            Par sach?
+                        </div>
+                        <div class="poem-stanza">
+                            Har joke ke beech mein,<br>
+                            har tease ke peeche,<br>
+                            har complaint ke andar…
+                        </div>
+                        <div class="poem-stanza">
+                            Ek baat chhupi hoti hai<br>
+                            jo main ab tak bol nahi paya.
+                        </div>
+                        <div class="poem-stanza">
+                            Abhi tak.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       SECTION 4: COMPLIMENTS SECTION
+       ========================================== -->
+    <section id="compliments">
+        <div class="container">
+            <div class="section-header">
+                <h2>Things I Never Say Out Loud</h2>
+                <p>Because speaking out loud is too hard.</p>
+            </div>
+
+            <!-- Tab Toggles -->
+            <div class="board-tabs">
+                <button class="tab-btn active" onclick="switchTab(0)">What I Notice</button>
+                <button class="tab-btn" onclick="switchTab(1)">What I Admire</button>
+                <button class="tab-btn" onclick="switchTab(2)">What Flusters Me</button>
+            </div>
+
+            <!-- Bullet point cards -->
+            <div class="board-content">
+                <!-- Tape top center of card -->
+                <div class="tape"
+                    style="width: 80px; height: 26px; top: -13px; left: 50%; margin-left: -40px; transform: rotate(-2deg); opacity: 0.9;">
+                </div>
+
+                <!-- Notice Card -->
+                <div class="sticky-card active" id="card-0">
+                    <div class="sticky-card-content">
+                        <div class="sticky-bullet">You notice details most people miss, and I really like that about
+                            you.</div>
+                        <div class="sticky-bullet">I’ve noticed the way you type changes depending on how you feel. Tiny
+                            things. Different pacing, different energy.</div>
+                        <div class="sticky-bullet">Even through a screen, I can somehow tell when something feels off.
+                            That’s terrifyingly unfair.</div>
+                    </div>
+                </div>
+
+                <!-- Admire Card -->
+                <div class="sticky-card" id="card-1">
+                    <div class="sticky-card-content">
+                        <div class="sticky-bullet">I admire your ability to stay calm and collected, even when things
+                            get chaotic around you.</div>
+                        <div class="sticky-bullet">You don’t force warmth. You just carry it. People feel safer around
+                            you.</div>
+                        <div class="sticky-bullet">When you care about something, you care fully. There’s something
+                            beautiful about that kind of sincerity.</div>
+                    </div>
+                </div>
+
+                <!-- Flusters Card -->
+                <div class="sticky-card" id="card-2">
+                    <div class="sticky-card-content">
+                        <div class="sticky-bullet">Your eyes are ridiculous. Seriously, what is wrong with them? They're
+                            way too bright, and they make me forget my lines.</div>
+                        <div class="sticky-bullet">Eye contact with you is basically gonna be a boss fight and I just
+                            know that I will lose every single time.</div>
+                        <div class="sticky-bullet">When you smirk at my 'ima bite you', my heart does something stupid
+                            and I blame you for it.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       CONSTELLATION SKY SECTION (GRADIENT TRANSITION)
+       ========================================== -->
+    <div class="sky-transition"></div>
+
+    <section id="constellation-section">
+        <div class="container">
+            <div class="sky-header">
+                <h2>Written in the Stars</h2>
+                <p>You make me see stars. Literally.</p>
+            </div>
+
+            <div class="canvas-container" id="canvas-container">
+                <!-- Ambient twinkling stars injected via JS -->
+
+                <svg class="star-map-svg" id="star-map">
+                    <!-- Constellation 1: Sunflower (center-left) -->
+                    <g class="constellation-group" id="const-sunflower" onclick="selectConstellation('sunflower')">
+                        <!-- lines connecting the stars -->
+                        <line x1="80" y1="120" x2="130" y2="100" class="constellation-line c-sunflower" />
+                        <line x1="130" y1="100" x2="160" y2="140" class="constellation-line c-sunflower" />
+                        <line x1="160" y1="140" x2="120" y2="180" class="constellation-line c-sunflower" />
+                        <line x1="120" y1="180" x2="80" y2="120" class="constellation-line c-sunflower" />
+                        <line x1="120" y1="180" x2="110" y2="250" class="constellation-line c-sunflower" />
+                        <line x1="110" y1="250" x2="90" y2="290" class="constellation-line c-sunflower" />
+
+                        <!-- actual stars -->
+                        <circle cx="80" cy="120" r="5" fill="#FFF" class="constellation-star c-sunflower" />
+                        <circle cx="130" cy="100" r="6" fill="#FFF" class="constellation-star c-sunflower" />
+                        <circle cx="160" cy="140" r="5" fill="#FFF" class="constellation-star c-sunflower" />
+                        <circle cx="120" cy="180" r="7" fill="#FFF" class="constellation-star c-sunflower" />
+                        <circle cx="110" cy="250" r="4" fill="#FFF" class="constellation-star c-sunflower" />
+                        <circle cx="90" cy="290" r="4" fill="#FFF" class="constellation-star c-sunflower" />
+
+                        <text x="120" y="80" class="constellation-label">Sunflower</text>
+                    </g>
+
+                    <!-- Constellation 2: Eyes (top-right) -->
+                    <g class="constellation-group" id="const-eyes" onclick="selectConstellation('eyes')">
+                        <line x1="240" y1="70" x2="280" y2="60" class="constellation-line c-eyes" />
+                        <line x1="280" y1="60" x2="310" y2="90" class="constellation-line c-eyes" />
+                        <line x1="310" y1="90" x2="270" y2="100" class="constellation-line c-eyes" />
+                        <line x1="270" y1="100" x2="240" y2="70" class="constellation-line c-eyes" />
+                        <line x1="275" y1="80" x2="280" y2="60" class="constellation-line c-eyes" />
+
+                        <!-- second eye -->
+                        <line x1="330" y1="80" x2="365" y2="110" class="constellation-line c-eyes" />
+                        <line x1="365" y1="110" x2="340" y2="130" class="constellation-line c-eyes" />
+
+                        <circle cx="240" cy="70" r="5" fill="#FFF" class="constellation-star c-eyes" />
+                        <circle cx="280" cy="60" r="6" fill="#FFF" class="constellation-star c-eyes" />
+                        <circle cx="310" cy="90" r="5" fill="#FFF" class="constellation-star c-eyes" />
+                        <circle cx="270" cy="100" r="5" fill="#FFF" class="constellation-star c-eyes" />
+                        <circle cx="275" cy="80" r="7" fill="#FFF" class="constellation-star c-eyes" />
+
+                        <circle cx="330" cy="80" r="5" fill="#FFF" class="constellation-star c-eyes" />
+                        <circle cx="365" cy="110" r="6" fill="#FFF" class="constellation-star c-eyes" />
+                        <circle cx="340" cy="130" r="5" fill="#FFF" class="constellation-star c-eyes" />
+
+                        <text x="300" y="40" class="constellation-label">Fair Eyes</text>
+                    </g>
+
+                    <!-- Constellation 3: Shyness (bottom-right) -->
+                    <g class="constellation-group" id="const-shyness" onclick="selectConstellation('shyness')">
+                        <line x1="210" y1="210" x2="260" y2="230" class="constellation-line c-shyness" />
+                        <line x1="260" y1="230" x2="240" y2="280" class="constellation-line c-shyness" />
+                        <line x1="240" y1="280" x2="310" y2="260" class="constellation-line c-shyness" />
+                        <line x1="310" y1="260" x2="340" y2="310" class="constellation-line c-shyness" />
+
+                        <circle cx="210" cy="210" r="5" fill="#FFF" class="constellation-star c-shyness" />
+                        <circle cx="260" cy="230" r="6" fill="#FFF" class="constellation-star c-shyness" />
+                        <circle cx="240" cy="280" r="5" fill="#FFF" class="constellation-star c-shyness" />
+                        <circle cx="310" cy="260" r="7" fill="#FFF" class="constellation-star c-shyness" />
+                        <circle cx="340" cy="310" r="5" fill="#FFF" class="constellation-star c-shyness" />
+
+                        <text x="270" y="195" class="constellation-label">Shyness</text>
+                    </g>
+
+                    <!-- Constellation 4: Future (bottom-left) -->
+                    <g class="constellation-group" id="const-future" onclick="selectConstellation('future')">
+                        <line x1="50" y1="320" x2="90" y2="340" class="constellation-line c-future" />
+                        <line x1="90" y1="340" x2="140" y2="330" class="constellation-line c-future" />
+
+                        <circle cx="50" cy="320" r="5" fill="#FFF" class="constellation-star c-future" />
+                        <circle cx="90" cy="340" r="6" fill="#FFF" class="constellation-star c-future" />
+                        <circle cx="140" cy="330" r="7" fill="#FFF" class="constellation-star c-future" />
+
+                        <text x="90" y="300" class="constellation-label">Future</text>
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Notes Panel for Constellations -->
+            <div class="star-note" id="star-note">
+                <div class="star-note-title" id="note-title">Click a constellation</div>
+                <div class="star-note-text" id="note-text">Tap the stars in the night sky to connect my thoughts.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       SECTION 6: FINAL CONFESSION
+       ========================================== -->
+    <section id="confession-section">
+        <!-- Overlay when the final "I love you" burst runs -->
+        <div class="final-reveal" id="final-reveal">
+            <div class="final-text">I love you, dumbass.</div>
+
+            <!-- Hand-drawn pulsing heart -->
+            <svg class="final-doodle" viewBox="0 0 24 24" fill="none">
+                <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                    fill="var(--accent-yellow)" />
+            </svg>
+
+            <button class="restart-btn" onclick="resetJourney()">read again</button>
+        </div>
+
+        <div class="confession-container" id="confession-container">
+            <!-- Central SVG Sunflower -->
+            <svg class="sunflower-trigger" id="sunflower-svg" viewBox="0 0 100 100" fill="none"
+                onclick="triggerConfession()">
+                <!-- stem & leaves -->
+                <path d="M50 65 L50 95" stroke="#4CAF50" stroke-width="4" stroke-linecap="round" />
+                <path d="M50 80 Q35 75 38 68 Q44 68 50 78" fill="#4CAF50" />
+                <path d="M50 85 Q65 80 62 73 Q56 73 50 83" fill="#4CAF50" />
+
+                <!-- Petals (Yellow circles arranged radially) -->
+                <circle cx="50" cy="30" r="14" fill="var(--accent-yellow)" />
+                <circle cx="50" cy="70" r="14" fill="var(--accent-yellow)" />
+                <circle cx="30" cy="50" r="14" fill="var(--accent-yellow)" />
+                <circle cx="70" cy="50" r="14" fill="var(--accent-yellow)" />
+
+                <circle cx="36" cy="36" r="14" fill="var(--accent-yellow)" />
+                <circle cx="64" cy="36" r="14" fill="var(--accent-yellow)" />
+                <circle cx="36" cy="64" r="14" fill="var(--accent-yellow)" />
+                <circle cx="64" cy="64" r="14" fill="var(--accent-yellow)" />
+
+                <!-- Flower seed center -->
+                <circle cx="50" cy="50" r="16" fill="#3E2723" />
+                <!-- seed highlights -->
+                <circle cx="47" cy="46" r="1.5" fill="#5D4037" />
+                <circle cx="53" cy="47" r="1" fill="#5D4037" />
+                <circle cx="48" cy="53" r="2" fill="#5D4037" />
+                <circle cx="54" cy="52" r="1.5" fill="#5D4037" />
+                <circle cx="50" cy="50" r="10" fill="#27120B" />
+            </svg>
+
+            <div class="tap-prompt" id="sunflower-prompt">tap the sunflower</div>
+
+            <div class="confession-story" id="confession-story"></div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       JAVASCRIPT SCRIPTS
+       ========================================== -->
+    <script>
+        /* --- LANDING SCRIPT: SEQUENTIAL LOAD --- */
+        document.addEventListener("DOMContentLoaded", () => {
+            const texts = ["text-1", "text-2", "text-3", "text-4"];
+            texts.forEach((id, index) => {
+                setTimeout(() => {
+                    const el = document.getElementById(id);
+                    if (el) el.classList.add("visible");
+                }, 600 + index * 1200);
+            });
+
+            setTimeout(() => {
+                const btn = document.getElementById("enter-btn");
+                if (btn) btn.classList.add("visible");
+            }, 600 + texts.length * 1200);
+
+            // Smooth scroll handler
+            document.getElementById("enter-btn").addEventListener("click", () => {
+                document.getElementById("lyrics").scrollIntoView({ behavior: "smooth" });
+            });
+
+            // Sparkle generator for stars section
+            generateSkyBackground();
+
+            // Setup intersection observer for scroll-triggered lyrics
+            setupLyricsReveal();
+        });
+
+        /* --- LYRICS REVEAL LOGIC --- */
+        function setupLyricsReveal() {
+            const lines = document.querySelectorAll(".lyric-line");
+            const observerOptions = {
+                root: null,
+                threshold: 0.1,
+                rootMargin: "0px 0px -40px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("reveal");
+
+                        // Highlight key phrases randomly or specifically
+                        if (entry.target.textContent.includes("Face turned red") ||
+                            entry.target.textContent.includes("shy") ||
+                            entry.target.textContent.includes("stupid truth") ||
+                            entry.target.textContent.includes("scare me") ||
+                            entry.target.textContent.includes("like you there")) {
+                            entry.target.classList.add("highlighted");
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            lines.forEach(line => observer.observe(line));
+        }
+
+        /* --- POETRY COLLAPSE TOGGLE --- */
+        function togglePoem(envelopeElement) {
+            const isOpen = envelopeElement.classList.contains("open");
+
+            // Close all envelopes first
+            document.querySelectorAll(".envelope").forEach(env => {
+                env.classList.remove("open");
+            });
+
+            // Toggle clicked envelope
+            if (!isOpen) {
+                envelopeElement.classList.add("open");
+                // Scroll into view slightly if clipped on mobile
+                setTimeout(() => {
+                    envelopeElement.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                }, 250);
+            }
+        }
+
+        /* --- COMPLIMENTS TAB CONTROLLER --- */
+        function switchTab(index) {
+            // Remove active classes
+            document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+            document.querySelectorAll(".sticky-card").forEach(card => card.classList.remove("active"));
+
+            // Add active classes to selected
+            const tabButtons = document.querySelectorAll(".tab-btn");
+            if (tabButtons[index]) tabButtons[index].classList.add("active");
+
+            const activeCard = document.getElementById(`card-${index}`);
+            if (activeCard) {
+                activeCard.classList.add("active");
+            }
+        }
+
+        /* --- CONSTELLATION MAP CONTROLLER --- */
+        // Notes content matching constellations
+        const constellationNotes = {
+            sunflower: {
+                title: "🌻 The Sunflower Constellation",
+                text: "Like a sunflower, you always seem to locate the light. Even on cloudy days, you find something to smile about. I want to learn to see things that way too."
+            },
+            eyes: {
+                title: "✨ The Eye Contact Constellation",
+                text: "Your eyes don't play fair. Whenever they point my direction, all my nervous jokes disappear and I realize I'm staring like a dumb schoolboy."
+            },
+            shyness: {
+                title: "💫 The Shy Constellation",
+                text: "I can ramble about lines of code, games, and lyrics. But when I remember the way your eyes look, my speech crashes. I hate how quiet you make me, but I love the panic."
+            },
+            future: {
+                title: "⏳ The Future Constellation",
+                text: "I don't know where paths go, or what tomorrow holds. But when I close my eyes and imagine a random Tuesday in November... I always want you in the center of it."
+            }
+        };
+
+        function selectConstellation(name) {
+            // Deactivate all stars and lines
+            document.querySelectorAll(".constellation-star").forEach(star => star.classList.remove("active"));
+            document.querySelectorAll(".constellation-line").forEach(line => line.classList.remove("active"));
+            document.querySelectorAll(".constellation-group").forEach(group => group.classList.remove("active"));
+
+            // Activate stars & lines matching the clicked constellation group
+            const groupEl = document.getElementById(`const-${name}`);
+            if (groupEl) {
+                groupEl.classList.add("active");
+
+                const stars = groupEl.querySelectorAll(".constellation-star");
+                const lines = groupEl.querySelectorAll(".constellation-line");
+
+                stars.forEach(star => star.classList.add("active"));
+                lines.forEach(line => line.classList.add("active"));
+            }
+
+            // Show constellation note
+            const notePanel = document.getElementById("star-note");
+            const noteTitle = document.getElementById("note-title");
+            const noteText = document.getElementById("note-text");
+
+            if (notePanel && noteTitle && noteText && constellationNotes[name]) {
+                notePanel.classList.remove("visible");
+                setTimeout(() => {
+                    noteTitle.textContent = constellationNotes[name].title;
+                    noteText.textContent = constellationNotes[name].text;
+                    notePanel.classList.add("visible");
+                }, 200);
+            }
+        }
+
+        // Generating small background stars
+        function generateSkyBackground() {
+            const container = document.getElementById("canvas-container");
+            if (!container) return;
+            const starCount = 30;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement("div");
+                star.className = "twinkle-star";
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                // Randomized delays and animation durations
+                star.style.animationDelay = `${Math.random() * 4}s`;
+                star.style.animationDuration = `${2 + Math.random() * 4}s`;
+                container.appendChild(star);
+            }
+        }
+
+        /* --- SECTION 6: FINAL CONFESSION SEQUENCER --- */
+        let confessionClicked = false;
+
+        function triggerConfession() {
+            if (confessionClicked) return;
+            confessionClicked = true;
+
+            // Hide prompts & start spinning the sunflower out of view
+            const sunflower = document.getElementById("sunflower-svg");
+            const prompt = document.getElementById("sunflower-prompt");
+
+            sunflower.classList.add("clicked");
+            prompt.classList.add("hidden");
+
+            // Change background slowly to deep wine/burgundy
+            const section = document.getElementById("confession-section");
+            section.classList.add("fade-to-burgundy");
+
+            // Narrative lines sequence
+            const lines = [
+                "I tried saying this elegantly.",
+                "I wrote poems.",
+                "Songs.",
+                "Letters.",
+                "An entire website.",
+                "But none of them say it simply enough."
+            ];
+
+            const storyContainer = document.getElementById("confession-story");
+            let lineIdx = 0;
+
+            function showNextLine() {
+                if (lineIdx < lines.length) {
+                    storyContainer.textContent = lines[lineIdx];
+                    storyContainer.classList.add("show");
+
+                    // Keep text visible for 2.2 seconds, then fade out
+                    setTimeout(() => {
+                        storyContainer.classList.remove("show");
+                        lineIdx++;
+                        // Pause brief moment before showing next line
+                        setTimeout(showNextLine, 800);
+                    }, 2200);
+                } else {
+                    // Final reveal trigger
+                    setTimeout(() => {
+                        const finalScreen = document.getElementById("final-reveal");
+                        finalScreen.classList.add("active");
+
+                        // Hide container to clean up space
+                        document.getElementById("confession-container").style.display = "none";
+                    }, 1200);
+                }
+            }
+
+            // Start typing sequences after the sunflower finishes spinning (1.2s)
+            setTimeout(showNextLine, 1200);
+        }
+
+        function resetJourney() {
+            // Restore confession container
+            document.getElementById("confession-container").style.style = "";
+            document.getElementById("confession-container").style.display = "flex";
+
+            // Deactivate final screen
+            const finalScreen = document.getElementById("final-reveal");
+            finalScreen.classList.remove("active");
+
+            // Reset sunflower
+            const sunflower = document.getElementById("sunflower-svg");
+            const prompt = document.getElementById("sunflower-prompt");
+            sunflower.classList.remove("clicked");
+            prompt.classList.remove("hidden");
+
+            // Reset background
+            const section = document.getElementById("confession-section");
+            section.classList.remove("fade-to-burgundy");
+
+            confessionClicked = false;
+
+            // Scroll smoothly back to landing
+            document.getElementById("landing").scrollIntoView({ behavior: "smooth" });
+        }
+    </script>
+</body>
+
+</html>
