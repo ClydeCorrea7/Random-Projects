@@ -1,386 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Happy Belated Birthdayy, Ariana! </title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy Belated Birthday, Harshita</title>
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Caveat:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
-    <!-- Fonts: Pixel + Clean -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;600;700&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --void:       #0a0716;
+    --void-deep:  #050310;
+    --nebula:     #241a3d;
+    --star:       #f6f1ff;
+    --star-dim:   #c9bce6;
+    --gold:       #e8b978;
+    --rose:       #f2879f;
+    --teal:       #7fe3d6;
+    --line:       rgba(232,185,120,0.35);
+  }
 
-    <style>
-        :root {
-            --bg-0: #050612;
-            --bg-1: #07102a;
-            --neon: #00f0ff;
-            --accent: #7c5cff;
-            --text-weak: #9fb8ff;
-            --text-strong: #dff3ff;
-        }
+  *{ box-sizing:border-box; }
 
-        body {
-            margin: 0;
-            font-family: "Inter", system-ui;
-            background: linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 60%);
-            color: var(--text-strong);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
+  html{ scroll-behavior:smooth; }
 
-        /* Sections now scroll normally */
-        section.chapter {
-            min-height: 100vh;
-            padding: 6rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 120% 80% at 50% -10%, var(--nebula) 0%, transparent 60%),
+      linear-gradient(180deg, var(--void) 0%, var(--void-deep) 100%);
+    color:var(--star);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
 
-        /* Pixel sky background */
-        .pixel-sky {
-            position: fixed;
-            inset: 0;
-            z-index: -3;
-            background: radial-gradient(circle at 10% 20%,
-                    rgba(255, 255, 255, 0.06) 0px,
-                    transparent 2px),
-                radial-gradient(circle at 80% 10%,
-                    rgba(255, 255, 255, 0.04) 0px,
-                    transparent 2px),
-                radial-gradient(circle at 30% 70%,
-                    rgba(255, 255, 255, 0.03) 0px,
-                    transparent 2px),
-                linear-gradient(180deg,
-                    rgba(7, 16, 42, 0.2) 0%,
-                    rgba(5, 6, 18, 0.35) 100%);
-            animation: starShift 20s linear infinite;
-        }
+  /* ---------- starfield canvas ---------- */
+  #stars{
+    position:fixed; inset:0; z-index:-2; pointer-events:none;
+  }
 
-        @keyframes starShift {
-            0% {
-                transform: translateY(0);
-                opacity: 1;
-            }
+  /* ---------- progress constellation thread (desktop) ---------- */
+  #thread-wrap{
+    position:fixed;
+    left:28px; top:0; bottom:0;
+    width:2px;
+    z-index:5;
+    display:none;
+  }
+  #thread-track{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent, rgba(255,255,255,0.06) 8%, rgba(255,255,255,0.06) 92%, transparent);
+  }
+  #thread-fill{
+    position:absolute; left:0; top:0; width:100%; height:0%;
+    background:linear-gradient(180deg, var(--gold), var(--rose) 45%, var(--teal) 100%);
+    box-shadow:0 0 12px rgba(232,185,120,0.6);
+    transition:height 80ms linear;
+  }
+  @media(min-width:900px){ #thread-wrap{ display:block; } }
 
-            50% {
-                transform: translateY(-20px);
-                opacity: 0.9;
-            }
+  /* ---------- layout ---------- */
+  section.chapter{
+    min-height:100vh;
+    padding:7rem 1.75rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
 
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+  .card{
+    width:min(760px, 100%);
+    position:relative;
+    z-index:2;
+  }
 
-        .pixel-grid::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            z-index: -2;
-            background-image: radial-gradient(circle,
-                    rgba(255, 255, 255, 0.02) 1px,
-                    transparent 1px);
-            background-size: 24px 24px;
-            opacity: 0.5;
-            animation: gridFloat 10s linear infinite;
-            pointer-events: none;
-        }
+  .eyebrow{
+    font-family:'Caveat', cursive;
+    font-size:1.35rem;
+    color:var(--gold);
+    letter-spacing:0.02em;
+    margin:0 0 0.4rem 0;
+    display:block;
+  }
 
-        @keyframes gridFloat {
-            0% {
-                transform: translateY(0);
-            }
+  h1,h2,h3,h4{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    margin:0;
+    color:var(--star);
+  }
 
-            50% {
-                transform: translateY(-6px);
-            }
+  h1{
+    font-size:clamp(2.4rem, 6vw, 4.2rem);
+    font-style:italic;
+    line-height:1.08;
+    background:linear-gradient(100deg, var(--star) 20%, var(--gold) 50%, var(--rose) 75%, var(--star) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-size:220% 100%;
+    animation:shimmer 9s ease-in-out infinite;
+  }
+  @keyframes shimmer{
+    0%,100%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+  }
 
-            100% {
-                transform: translateY(0);
-            }
-        }
+  h2{
+    font-size:clamp(1.8rem, 3.4vw, 2.6rem);
+    text-align:center;
+    margin-bottom:2.2rem;
+    color:var(--star);
+  }
+  h2 em{ color:var(--gold); font-style:italic; }
 
-        .crt::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            background: repeating-linear-gradient(180deg,
-                    rgba(0, 0, 0, 0.03) 0px,
-                    rgba(0, 0, 0, 0.03) 1px,
-                    transparent 1px,
-                    transparent 2px);
-            opacity: 0.25;
-            pointer-events: none;
-        }
+  .rule{
+    width:64px; height:1px;
+    background:linear-gradient(90deg, transparent, var(--line), transparent);
+    margin:0.9rem auto 0;
+  }
 
-        .pixel {
-            font-family: "Press Start 2P", monospace;
-        }
+  p.lede{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.25rem;
+    color:var(--star-dim);
+    margin-top:1.1rem;
+  }
 
-        .card {
-            width: min(1100px, 96%);
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 14px;
-            padding: 2.4rem;
-            border: 1px solid rgba(124, 92, 255, 0.12);
-            backdrop-filter: blur(6px) saturate(120%);
-            box-shadow: 0 8px 40px rgba(3, 6, 20, 0.6);
-        }
+  .reveal-line{
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity 0.9s cubic-bezier(.2,.7,.2,1), transform 0.9s cubic-bezier(.2,.7,.2,1);
+  }
+  .reveal-line.show{ opacity:1; transform:translateY(0); }
 
-        .neon-text {
-            color: var(--neon);
-            text-shadow: 0 0 8px rgba(0, 240, 255, 0.25);
-        }
+  .prose p{
+    font-size:1.08rem;
+    line-height:1.85;
+    color:var(--star-dim);
+    max-width:560px;
+    margin:0 auto 1.1rem;
+    text-align:center;
+  }
 
-        .typewriter {
-            font-family: "Press Start 2P";
-            font-size: 0.95rem;
-            color: var(--text-weak);
-        }
+  /* stanza styling */
+  .stanza{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.28rem;
+    line-height:2;
+    color:var(--star);
+    text-align:center;
+    max-width:640px;
+    margin:0 auto 2.6rem;
+    position:relative;
+    padding-bottom:1.6rem;
+  }
+  .stanza:last-child{ margin-bottom:0; }
+  .stanza::after{
+    content:"✦";
+    position:absolute;
+    bottom:0; left:50%;
+    transform:translateX(-50%);
+    color:var(--gold);
+    font-size:0.7rem;
+    opacity:0.7;
+  }
+  .stanza:last-child::after{ display:none; }
 
-        .cursor {
-            width: 12px;
-            height: 18px;
-            background: var(--neon);
-            animation: blink 900ms steps(2, start) infinite;
-            display: inline-block;
-            vertical-align: middle;
-        }
+  /* buttons */
+  .btn{
+    appearance:none;
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--gold);
+    font-family:'Jost', sans-serif;
+    font-size:0.85rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    padding:0.85rem 1.7rem;
+    border-radius:999px;
+    cursor:pointer;
+    transition:all .35s ease;
+    display:inline-block;
+  }
+  .btn:hover{
+    border-color:var(--gold);
+    background:rgba(232,185,120,0.08);
+    box-shadow:0 0 24px rgba(232,185,120,0.25);
+    transform:translateY(-2px);
+  }
+  .btn:focus-visible{ outline:2px solid var(--teal); outline-offset:3px; }
 
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
-        }
+  .center{ text-align:center; }
 
-        .reveal-line {
-            opacity: 0;
-            font-family: "Pixelify Sans", sans-serif;
-            font-size: 20px;
-            transform: translateY(10px);
-            transition: 0.6s ease;
-        }
+  /* secret panel */
+  #secret{
+    margin-top:1.6rem;
+    padding:1.6rem;
+    border-radius:14px;
+    border:1px solid rgba(242,135,159,0.25);
+    background:rgba(242,135,159,0.05);
+    display:none;
+  }
 
-        .reveal-line.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+  /* signature constellation svg */
+  .constellation{
+    width:100%;
+    max-width:520px;
+    margin:0 auto 1.6rem;
+    display:block;
+  }
+  .constellation circle{
+    fill:var(--gold);
+    filter:drop-shadow(0 0 5px rgba(232,185,120,0.8));
+  }
+  .constellation path{
+    fill:none;
+    stroke:var(--line);
+    stroke-width:1;
+    stroke-dasharray:6 500;
+    stroke-dashoffset:0;
+    animation:drawline 6s ease-in-out infinite alternate;
+  }
+  @keyframes drawline{
+    0%{ stroke-dasharray:6 500; }
+    100%{ stroke-dasharray:500 6; }
+  }
 
-        .btn-neon {
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid rgba(0, 240, 255, 0.22);
-            color: var(--neon);
-            padding: 0.7rem 1.1rem;
-            border-radius: 10px;
-            font-family: "Pixelify Sans", sans-serif;
-            font-weight: 700;
-            letter-spacing: 0.6px;
-        }
+  footer.note{
+    text-align:center;
+    font-family:'Caveat', cursive;
+    font-size:1.15rem;
+    color:var(--star-dim);
+    opacity:0.75;
+    padding:2rem 1rem 3.5rem;
+  }
 
-        .btn-neon:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 18px rgba(0, 240, 255, 0.3);
-        }
-
-        @media (max-width: 640px) {
-            .card {
-                padding: 1.4rem;
-            }
-
-            .typewriter {
-                font-size: 0.8rem;
-            }
-        }
-    </style>
-
-    <script>
-        function revealSecret() {
-            document.getElementById("secret").style.display = "block";
-            document.getElementById("revealBtn").style.display = "none";
-        }
-
-        function typeWrite(text, el, i = 0) {
-            if (i < text.length) {
-                el.innerHTML += text.charAt(i);
-                setTimeout(() => typeWrite(text, el, i + 1), 45);
-            }
-        }
-
-        window.onload = () => {
-            typeWrite(
-                "I know I'm late, but the magic hasn't expired yet.",
-                document.getElementById("intro-type")
-            );
-            document.querySelectorAll(".reveal-line").forEach((el) => {
-                const obs = new IntersectionObserver(
-                    (entries) => {
-                        entries.forEach((e) => {
-                            if (e.isIntersecting) e.target.classList.add("show");
-                        });
-                    },
-                    { threshold: 0.2 }
-                );
-                obs.observe(el);
-            });
-        };
-    </script>
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+    .reveal-line{ opacity:1; transform:none; }
+  }
+</style>
 </head>
+<body>
 
-<body class="pixel-grid crt">
-    <div class="pixel-sky"></div>
+<canvas id="stars"></canvas>
+<div id="thread-wrap"><div id="thread-track"></div><div id="thread-fill"></div></div>
 
-    <!-- INTRO -->
-    <section class="chapter text-center">
-        <div class="card">
-            <h1 class="pixel neon-text text-3xl mb-4">HAPPY BELATED BIRTHDAYYYY ARIANA</h1>
-            <p id="intro-type" class="typewriter mb-3"></p>
-            <span class="cursor"></span>
+<!-- INTRO -->
+<section class="chapter">
+  <div class="card center">
+    <span class="eyebrow">for Harshita — a little late, still true</span>
+    <h1>Happy Belated<br>Birthday</h1>
+    <p class="lede reveal-line">I know I'm late, but honestly? Better late than never yeah?.</p>
+    <div class="rule"></div>
+    <div style="margin-top:2.4rem;">
+      <button class="btn" onclick="document.getElementById('ch-2').scrollIntoView({behavior:'smooth'})">Begin</button>
+    </div>
+  </div>
+</section>
 
-            <div class="mt-6">
-                <button onclick="window.scrollTo({top: window.innerHeight, behavior:'smooth'})" class="btn-neon">
-                    Next
-                </button>
-            </div>
-        </div>
-    </section>
+<!-- WHY SHE'S ONE OF A KIND -->
+<section class="chapter" id="ch-2">
+  <div class="card">
+    <h2 reveal>Why You're <em>One of a Kind</em></h2>
+    <div class="prose">
+      <p class="reveal-line">You = definition of cuteness. I don't make the rules.</p>
+      <p class="reveal-line">Your smile should honestly come with a warning label — I was not prepared.</p>
+      <p class="reveal-line">I've met a lot of people, but no one who makes "genuine and kind" look this good.</p>
+      <p class="reveal-line">Even if I missed the exact day and showed up fashionably late — some things (like crushing on you) are worth the wait.</p>
+    </div>
+  </div>
+</section>
 
-    <!-- WHY I TRUST YOU -->
-    <section class="chapter">
-        <div class="card">
-            <h2 class="pixel text-cyan-300 text-xl mb-2 text-center">
-                Why You're One of a Kind
-            </h2>
-            <div class="space-y-3 text-purple-100/90 max-w-2xl mx-auto">
-                <p class="reveal-line">
-                    You have this way of making everything feel a bit more colorful.
-                </p>
-                <p class="reveal-line">
-                    Your energy is something the world definitely needs more of.
-                </p>
-                <p class="reveal-line">
-                    I'm lucky to know someone as genuine and kind as you.
-                </p>
-                <p class="reveal-line">
-                    Even if I missed the exact day, and met you just a little late I do wanna wish u a VERYYYYY happy
-                    belated birthday.
-                </p>
-            </div>
-        </div>
-    </section>
+<!-- WISHES -->
+<section class="chapter">
+  <div class="card">
+    <h2>Wishes for Your <em>New Year</em></h2>
+    <div class="prose">
+      <p class="reveal-line">May this year hand you everything you deserve — which, fair warning, is a lot, because you're kind of unreal.</p>
+      <p class="reveal-line">I hope the small moments keep sneaking up on you and making you smile like that, the one that's dangerously effective on me.</p>
+      <p class="reveal-line">You deserve a life as bright as your smile, and someone who reminds you daily that it's your best feature (close second: everything else).</p>
+    </div>
+  </div>
+</section>
 
-    <!-- QUOTES -->
-    <section class="chapter">
-        <div class="card">
-            <h2 class="pixel text-cyan-300 text-xl mb-4 text-center">
-                Wishes For Your New Year
-            </h2>
-            <div class="space-y-3 max-w-2xl mx-auto">
-                <p class="reveal-line">
-                    May your year be filled with spontaneous joy and endless laughter.
-                </p>
-                <p class="reveal-line">
-                    I hope you find beauty in the small, quiet moments.
-                </p>
-                <p class="reveal-line">You deserve a life that feels as bright as your smile.</p>
-                <p class="reveal-line">
-                    Don't ever let the world dim your sparkle, Ariana.
-                </p>
-            </div>
-        </div>
-    </section>
+<!-- THE GRACE YOU CARRY -->
+<section class="chapter">
+  <div class="card">
+    <h2>The <em>Grace</em> You Carry</h2>
+    <p class="lede reveal-line center" style="margin-bottom:2rem;">fair warning, this part is basically me admitting I'm smitten in verse form.</p>
+    <div>
+      <div class="stanza reveal-line">
+        You carry Athena's mind, precise and bright,<br>
+        A steady fire no chaos can dethrone,<br>
+        You walk like Artemis, fierce in quiet night,<br>
+        Untamed, yet never truly alone.
+      </div>
+      <div class="stanza reveal-line">
+        You hold Hestia's warmth within your soul,<br>
+        A sacred calm the restless lean into,<br>
+        You echo Nyx, depths beyond control,<br>
+        And even darkness softens around you.
+      </div>
+      <div class="stanza reveal-line">
+        You bloom like Persephone, soft spring reborn,<br>
+        Yet carry autumn's quiet, shadowed grace,<br>
+        You guard like Hera, regal, never torn,<br>
+        A sovereign strength no time could erase.
+      </div>
+      <div class="stanza reveal-line">
+        You shine with Selene, gentle silver light,<br>
+        A calm that pulls the tides without a sound,<br>
+        You flow like Iris, colors stitched in flight,<br>
+        A fleeting beauty heaven sent to ground.
+      </div>
+      <div class="stanza reveal-line">
+        You blaze like Hecate, keeper of the flame,<br>
+        At every crossroad, you command the dark,<br>
+        You roar with Demeter's fierce, unyielding claim,<br>
+        A love that turns the barren into spark.
+      </div>
+      <div class="stanza reveal-line">
+        You rise like Eos, painting skies anew,<br>
+        Each dawn feels softer just because of you,<br>
+        You hold Themis' truth in all you do,<br>
+        A balance rare, unwavering and true.
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- THE GRACE YOU CARRY -->
-    <section class="chapter">
-        <div class="card">
-            <h2 class="pixel text-cyan-300 text-xl mb-6 text-center">
-                The Grace You Carry
-            </h2>
-            <div class="space-y-10 text-purple-200 text-lg leading-relaxed max-w-3xl mx-auto text-center italic">
-                <div class="reveal-line">
-                    You carry Athena’s mind, precise and bright,<br>
-                    A steady fire no chaos can dethrone,<br>
-                    You walk like Artemis, fierce in quiet night,<br>
-                    Untamed, yet never truly alone.
-                </div>
+<!-- SECRET -->
+<section class="chapter">
+  <div class="card center">
+    <svg class="constellation" viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg">
+      <path d="M40,100 L120,40 L210,90 L300,30 L390,80 L460,45"/>
+      <circle cx="40" cy="100" r="3"></circle>
+      <circle cx="120" cy="40" r="3"></circle>
+      <circle cx="210" cy="90" r="3"></circle>
+      <circle cx="300" cy="30" r="3"></circle>
+      <circle cx="390" cy="80" r="3"></circle>
+      <circle cx="460" cy="45" r="3"></circle>
+    </svg>
+    <h3 class="eyebrow" style="font-size:1.6rem;">A small confession</h3>
+    <p class="prose" style="margin-top:0.6rem;"><span class="reveal-line" style="display:inline-block;">Click if you dare</span></p>
+    <button id="revealBtn" class="btn" onclick="document.getElementById('secret').style.display='block'; this.style.display='none';">Reveal</button>
+    <div id="secret">
+      <p class="prose" style="margin:0;">I spent way too long looking for a gift as cool as you at night instead of sleeping, and came up empty — turns out they don't sell "impossibly charming" on blinkit nor flipkart minutes not even Zepto. (Okay fine, I just couldn't find the right one. But you already knew you were unmatched.)</p>
+    </div>
+  </div>
+</section>
 
-                <div class="reveal-line">
-                    You hold Hestia’s warmth within your soul,<br>
-                    A sacred calm the restless lean into,<br>
-                    You echo Nyx, depths beyond control,<br>
-                    And even darkness softens around you.
-                </div>
+<!-- END -->
+<section class="chapter">
+  <div class="card center">
+    <h2 style="margin-bottom:0.6rem;">Happy Birthday, <em>Harshita</em></h2>
+    <p class="eyebrow" style="margin-bottom:1.6rem;">belated, but so is falling for you — it still counts</p>
+    <p class="prose">Better late than never, right? This page is yours whenever you need a reminder that you're the best thing that's happened to my scrolling. Have the best year yet — you've earned it, and so have I, for finally telling you all this.</p>
+    <div style="margin-top:1.8rem;">
+      <button class="btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to the Start</button>
+    </div>
+  </div>
+</section>
 
-                <div class="reveal-line">
-                    You bloom like Persephone, soft spring reborn,<br>
-                    Yet carry autumn’s quiet, shadowed grace,<br>
-                    You guard like Hera, regal, never torn,<br>
-                    A sovereign strength no time could erase.
-                </div>
+<footer class="note">made with time, a stupid amount of overthinking, and not money.</footer>
 
-                <div class="reveal-line">
-                    You shine with Selene, gentle silver light,<br>
-                    A calm that pulls the tides without a sound,<br>
-                    You flow like Iris, colors stitched in flight,<br>
-                    A fleeting beauty heaven sent to ground.
-                </div>
+<script>
+  // ---------- starfield ----------
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const count = Math.floor((canvas.width * canvas.height) / 9000);
+    stars = Array.from({length:count}, () => ({
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height,
+      r: Math.random()*1.3 + 0.2,
+      s: Math.random()*0.02 + 0.005,
+      phase: Math.random()*Math.PI*2
+    }));
+  }
+  let t = 0;
+  function draw(){
+    t += 1;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(const st of stars){
+      const tw = 0.55 + 0.45*Math.sin(t*st.s + st.phase);
+      ctx.beginPath();
+      ctx.arc(st.x, st.y, st.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(246,241,255,${tw})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
 
-                <div class="reveal-line">
-                    You blaze like Hecate, keeper of the flame,<br>
-                    At every crossroad, you command the dark,<br>
-                    You roar with Demeter’s fierce, unyielding claim,<br>
-                    A love that turns the barren into spark.
-                </div>
+  // ---------- scroll reveal ----------
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
+  }, { threshold:0.2 });
+  document.querySelectorAll('.reveal-line').forEach(el => obs.observe(el));
 
-                <div class="reveal-line">
-                    You rise like Eos, painting skies anew,<br>
-                    Each dawn feels softer just because of you,<br>
-                    You hold Themis’ truth in all you do,<br>
-                    A balance rare, unwavering and true.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECRET -->
-    <section class="chapter">
-        <div class="card text-center max-w-xl mx-auto">
-            <h3 class="pixel text-cyan-300 mb-4">A small confession</h3>
-            <p class="reveal-line">Click if you want to know</p>
-            <button id="revealBtn" onclick="revealSecret()" class="btn-neon">
-                Reveal
-            </button>
-
-            <div id="secret" class="mt-6 p-4 rounded-md border border-purple-700/20" style="display: none">
-                <p class="reveal-line">
-                    I was busy looking for a gift as cool as you... and realized nothing really compares.
-                    (Okay, I just couldn't find the right one, but you're still the best!)
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- END -->
-    <section class="chapter">
-        <div class="card text-center max-w-xl mx-auto">
-            <h4 class="pixel neon-text text-xl mb-3">Happy Birthday, Ariana! (belated but still counts)</h4>
-            <p class="reveal-line">
-                Better late than never, right? This page is yours whenever you need a little boost.
-                Have the best year yet.
-            </p>
-            <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="btn-neon">
-                Back to Top
-            </button>
-            <p class="reveal-line">Made with time, stupid amount of overthinking and not money.</p>
-        </div>
-    </section>
+  // ---------- progress thread ----------
+  const fill = document.getElementById('thread-fill');
+  function updateThread(){
+    const scrolled = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(100, (scrolled/max)*100) : 0;
+    if(fill) fill.style.height = pct + '%';
+  }
+  window.addEventListener('scroll', updateThread, { passive:true });
+  updateThread();
+</script>
 </body>
-
 </html>
