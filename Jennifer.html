@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#ffb7d5">
+<title>Jennifer's Little World ♡</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root{
+  --pink:#ffb7d5; --hot:#ff78b6; --deep:#542b4e; --cream:#fff8ea;
+  --white:#fff; --red:#ff5c7a; --lav:#d9c7ff; --shadow:#7c456c;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--pink);color:var(--deep);font-family:'Nunito',sans-serif;overflow-x:hidden}
+button{font:inherit}
+.screen{min-height:100svh;position:relative;overflow:hidden}
+.pixel-font{font-family:'DotGothic16',monospace;letter-spacing:.03em}
+
+/* pixel-ish decorative world */
+.pixel-cloud{position:absolute;width:82px;height:25px;background:#fff;border:4px solid var(--deep);border-radius:5px;box-shadow:6px 6px 0 rgba(84,43,78,.15);opacity:.9}
+.pixel-cloud:before,.pixel-cloud:after{content:'';position:absolute;background:#fff;border:4px solid var(--deep);border-bottom:0;border-radius:50% 50% 0 0}
+.pixel-cloud:before{width:25px;height:22px;left:10px;top:-18px}.pixel-cloud:after{width:35px;height:30px;right:8px;top:-25px}
+.cloud1{top:10%;left:5%}.cloud2{top:18%;right:5%;transform:scale(.7)}.cloud3{top:38%;left:15%;transform:scale(.55)}
+.star{position:absolute;font-size:25px;animation:float 3s ease-in-out infinite}.s1{top:16%;left:35%}.s2{top:27%;right:17%;animation-delay:1s}.s3{top:48%;left:7%;animation-delay:.4s}.s4{top:62%;right:8%;animation-delay:1.4s}
+@keyframes float{50%{transform:translateY(-8px) rotate(5deg)}}
+
+/* opening */
+#opening{display:grid;place-items:center;background:linear-gradient(180deg,#ffb7d5 0%,#ffcce2 68%,#fff1f6 100%);text-align:center;padding:24px}
+.opening-content{position:relative;z-index:2;max-width:390px}
+.mini-label{font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}
+.title{font-family:'DotGothic16',monospace;font-size:clamp(30px,9vw,48px);line-height:1.05;margin:0;text-shadow:4px 4px 0 #fff}
+.subtitle{font-size:15px;line-height:1.5;font-weight:700;margin:17px auto 25px;max-width:290px}
+.cat{position:relative;width:112px;height:94px;margin:0 auto 22px;filter:drop-shadow(5px 5px 0 rgba(84,43,78,.16));animation:catbob 2.5s ease-in-out infinite}
+.cat .head{position:absolute;left:10px;top:15px;width:92px;height:70px;background:#fff;border:5px solid var(--deep);border-radius:42% 42% 38% 38%}
+.cat .ear{position:absolute;top:1px;width:35px;height:35px;background:#fff;border:5px solid var(--deep);transform:rotate(45deg);z-index:-1}.cat .ear.l{left:15px}.cat .ear.r{right:15px}
+.cat .ear:after{content:'';position:absolute;inset:7px;background:#ff9fc8;border-radius:50%}
+.eye{position:absolute;width:7px;height:10px;background:var(--deep);border-radius:50%;top:42px}.eye.l{left:33px}.eye.r{right:33px}
+.nose{position:absolute;left:50%;top:51px;width:7px;height:6px;background:var(--red);transform:translateX(-50%);border-radius:50%}
+.whisk{position:absolute;width:20px;height:2px;background:var(--deep);top:53px}.w1{left:7px;transform:rotate(8deg)}.w2{left:6px;top:60px;transform:rotate(-8deg)}.w3{right:7px;transform:rotate(-8deg)}.w4{right:6px;top:60px;transform:rotate(8deg)}
+.bow{position:absolute;right:7px;top:5px;width:34px;height:27px;z-index:4}.bow:before,.bow:after{content:'';position:absolute;width:19px;height:24px;background:var(--red);border:4px solid var(--deep);top:0}.bow:before{left:0;transform:skewY(10deg);border-radius:5px 12px 5px 10px}.bow:after{right:0;transform:skewY(-10deg);border-radius:12px 5px 10px 5px}.bow span{position:absolute;width:12px;height:12px;background:#ff7b9c;border:3px solid var(--deep);left:11px;top:7px;z-index:2}
+@keyframes catbob{50%{transform:translateY(-6px)}}
+.cta{border:4px solid var(--deep);background:#fff;padding:13px 25px;border-radius:8px;box-shadow:6px 6px 0 var(--deep);font-weight:900;color:var(--deep);cursor:pointer;transition:.15s transform,.15s box-shadow}.cta:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--deep)}
+
+/* main world */
+#world{background:var(--cream);padding:72px 18px 50px}
+.wrap{max-width:520px;margin:auto;position:relative;z-index:2}
+.section-kicker{font-family:'DotGothic16';font-size:13px;text-align:center;margin-bottom:9px}.section-title{text-align:center;font-size:28px;margin:0 0 12px;font-weight:900}.intro{text-align:center;line-height:1.6;font-size:15px;margin:0 auto 28px;max-width:380px}
+.quest-box{background:#fff;border:4px solid var(--deep);box-shadow:7px 7px 0 var(--deep);padding:19px;border-radius:7px;margin-bottom:32px;position:relative}.quest-box:before{content:'♡';position:absolute;right:13px;top:9px;font-size:22px;color:var(--red)}
+.quest-box p{margin:0;line-height:1.55;font-weight:700}
+.start-quest{display:block;margin:17px auto 0}
+
+#reasons{padding-top:25px}.reason-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-top:20px}.reason-card{min-height:154px;border:4px solid var(--deep);background:#ffd5e7;box-shadow:5px 5px 0 var(--deep);border-radius:7px;cursor:pointer;perspective:700px;position:relative}.reason-inner{height:100%;min-height:154px;transition:transform .55s;transform-style:preserve-3d;position:relative}.reason-card.open .reason-inner{transform:rotateY(180deg)}.reason-front,.reason-back{position:absolute;inset:0;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;text-align:center}.reason-back{transform:rotateY(180deg);background:#fff8fc}.reason-num{font-family:'DotGothic16';font-size:12px;margin-bottom:10px}.reason-icon{font-size:30px;margin-bottom:8px}.reason-front strong{font-size:13px}.reason-back strong{font-size:15px;margin-bottom:7px}.reason-back p{font-size:12px;line-height:1.45;margin:0}.tap{font-size:10px;opacity:.65;margin-top:9px;font-weight:800}
+
+.progress{margin:24px 0 0;text-align:center;font-family:'DotGothic16';font-size:11px}.bar{height:14px;border:3px solid var(--deep);background:#fff;margin-top:7px;border-radius:3px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:var(--hot);transition:width .35s}
+
+/* transition */
+#letter{padding:85px 18px 70px;background:linear-gradient(180deg,var(--cream),#ffe5f0);min-height:100svh}.pause{text-align:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:900;opacity:.65;margin-bottom:14px}.letter-intro{text-align:center;font-family:'DotGothic16';font-size:22px;line-height:1.3;margin-bottom:30px}.letter{background:#fff;border:4px solid var(--deep);box-shadow:8px 8px 0 var(--deep);padding:25px 20px;border-radius:7px;position:relative}.letter:before{content:'♡';position:absolute;right:14px;top:10px;color:var(--red);font-size:25px}.letter h3{font-family:'DotGothic16';font-size:18px;margin:0 0 22px}.letter p{font-size:15px;line-height:1.75;margin:0 0 17px}.signature{margin-top:25px;font-weight:900}.final-line{text-align:center;font-family:'DotGothic16';font-size:22px;margin:32px 0 0;line-height:1.35}
+
+/* final */
+#final{min-height:100svh;background:linear-gradient(180deg,#ffb7d5,#ff91c3);display:grid;place-items:center;text-align:center;padding:35px 20px;position:relative}.final-card{position:relative;z-index:2;background:#fff;border:5px solid var(--deep);box-shadow:9px 9px 0 var(--deep);padding:28px 20px;border-radius:8px;max-width:390px;width:100%}.complete{font-family:'DotGothic16';font-size:12px;letter-spacing:.15em;margin-bottom:10px}.final-card h2{font-family:'DotGothic16';font-size:34px;margin:4px 0 20px}.stats{border-top:3px dashed #d79bb9;border-bottom:3px dashed #d79bb9;padding:14px 5px;text-align:left;font-family:'DotGothic16';font-size:11px;line-height:2}.stat-line{display:flex;justify-content:space-between}.loved{letter-spacing:.04em}.ending{font-weight:800;line-height:1.55;margin:22px 0 0}.heartburst{position:absolute;inset:0;pointer-events:none;overflow:hidden}.particle{position:absolute;font-size:20px;animation:rise 4s linear infinite;bottom:-30px}.particle:nth-child(1){left:8%;animation-delay:.2s}.particle:nth-child(2){left:22%;animation-delay:1.4s}.particle:nth-child(3){left:40%;animation-delay:.7s}.particle:nth-child(4){left:61%;animation-delay:2s}.particle:nth-child(5){left:78%;animation-delay:1s}.particle:nth-child(6){left:91%;animation-delay:2.5s}@keyframes rise{0%{transform:translateY(0) rotate(0);opacity:0}15%{opacity:1}100%{transform:translateY(-105svh) rotate(25deg);opacity:0}}
+
+.hidden{display:none!important}.fade-in{animation:fade .7s ease both}@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(min-width:600px){.reason-grid{grid-template-columns:repeat(2,1fr)}#world,#letter{padding-left:30px;padding-right:30px}.reason-card{min-height:170px}.reason-inner{min-height:170px}}
+
+/* CHAOS MODE */
+.screen:before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:17px 17px;opacity:.16}.opening-content{transform:rotate(-1deg)}.opening-content .title{font-size:clamp(3rem,17vw,5rem);text-shadow:5px 5px 0 #fff,-3px 3px 0 #ff78b6;animation:wobble 2.5s ease-in-out infinite}@keyframes wobble{0%,100%{transform:rotate(-2deg) scale(1)}50%{transform:rotate(2deg) scale(1.035)}}.subtitle{background:#fff;border:4px solid var(--deep);box-shadow:7px 7px 0 var(--deep);padding:12px;transform:rotate(1.5deg)}.cta{border:4px solid var(--deep);box-shadow:6px 6px 0 var(--deep);transform:rotate(-1deg);transition:.12s}.cta:active{transform:translate(5px,5px) rotate(1deg);box-shadow:1px 1px 0 var(--deep)}#world{background:#fff1f7;padding-top:55px}.section-kicker{display:inline-block;background:#ff5c7a;color:#fff;border:3px solid var(--deep);padding:6px 9px;transform:rotate(-2deg);box-shadow:4px 4px 0 var(--deep)}.section-title{font-size:clamp(2rem,10vw,3.5rem);line-height:.95;margin:18px 0 12px;transform:rotate(1deg)}.intro{font-size:1.08rem}.quest-box{border:4px dashed var(--deep);background:#fff;padding:20px;box-shadow:8px 8px 0 #ff8fc7;transform:rotate(-1deg);position:relative}.quest-box:after{content:"🐾";position:absolute;right:10px;top:-25px;font-size:30px;transform:rotate(15deg)}#reasons{margin-top:55px}.reason-grid{gap:18px}.reason-card{border:0;background:transparent;min-height:190px;perspective:900px}.reason-inner{border:4px solid var(--deep);box-shadow:7px 7px 0 var(--deep);border-radius:3px;min-height:190px}.reason-card:nth-child(3n){transform:rotate(1.7deg)}.reason-card:nth-child(3n+1){transform:rotate(-1.4deg)}.reason-card:nth-child(3n+2){transform:rotate(.4deg)}.reason-front{background:#fff}.reason-card:nth-child(4n) .reason-front{background:#ffe0ed}.reason-card:nth-child(5n) .reason-front{background:#fff5c9}.reason-icon{font-size:42px;filter:drop-shadow(3px 3px 0 #ffb7d5)}.tap{font-size:.75rem;background:#ffb7d5;border:2px solid var(--deep);padding:5px 8px;display:inline-block;margin-top:8px}.reason-back{background:#542b4e;color:#fff}.reason-back p{font-size:.92rem;line-height:1.35}.progress{background:#fff;border:4px solid var(--deep);box-shadow:5px 5px 0 var(--deep);padding:10px;position:sticky;bottom:10px;z-index:10;margin-top:25px}.bar{border:3px solid var(--deep);height:18px;background:#ffe0ed}.bar span{background:#ff5c7a}.letter-intro{font-size:clamp(2rem,9vw,3rem);font-weight:900;line-height:.95;transform:rotate(-2deg)}#letter{background:#fff5c9;padding-top:70px}.letter{border:4px solid var(--deep);box-shadow:9px 9px 0 var(--deep);background:#fff;padding:24px 20px;position:relative;transform:rotate(1deg);margin-top:25px}.letter:before{content:"♡ IMPORTANT ♡";position:absolute;top:-18px;left:15px;background:#ff5c7a;color:#fff;border:3px solid var(--deep);padding:5px 8px;font-family:'DotGothic16';transform:rotate(-3deg)}.letter p{font-size:1.05rem;line-height:1.65}.letter strong{font-size:1.5rem;color:#ff5c7a}.final-line{font-size:clamp(2.2rem,11vw,4rem);font-weight:900;line-height:.9;text-align:center;transform:rotate(-2deg);margin-top:60px}.final-card{border:5px solid var(--deep);box-shadow:10px 10px 0 var(--deep);transform:rotate(1deg);background:#fff;padding:24px;position:relative}.final-card:before{content:"CAT APPROVED ✓";position:absolute;top:-22px;right:10px;background:#ffb7d5;border:3px solid var(--deep);padding:4px;transform:rotate(4deg)}.complete{display:inline-block;background:#ff5c7a;color:#fff;padding:5px;border:3px solid var(--deep);transform:rotate(-2deg)}.cat{animation:bounceCat 1.4s ease-in-out infinite}@keyframes bounceCat{50%{transform:translateY(-10px) rotate(2deg)}}
+</style>
+</head>
+<body>
+<section id="opening" class="screen">
+  <div class="pixel-cloud cloud1"></div><div class="pixel-cloud cloud2"></div><div class="pixel-cloud cloud3"></div>
+  <div class="star s1">✦</div><div class="star s2">✧</div><div class="star s3">✦</div><div class="star s4">♡</div>
+  <div class="opening-content">
+    <div class="cat" aria-label="pixel cat">
+      <div class="ear l"></div><div class="ear r"></div><div class="head"></div>
+      <div class="eye l"></div><div class="eye r"></div><div class="nose"></div>
+      <div class="whisk w1"></div><div class="whisk w2"></div><div class="whisk w3"></div><div class="whisk w4"></div>
+      <div class="bow"><span></span></div>
+    </div>
+    <div class="mini-label">WARNING: BIRTHDAY CAT ZONE FOR</div>
+    <h1 class="title">JENNIFER ♡</h1>
+    <p class="subtitle">A highly unnecessary website has been created because apparently being normal was never an option.</p>
+    <button class="cta" id="openBtn">♡ OPEN THE SURPRISE ♡</button>
+  </div>
+</section>
+
+<section id="world" class="screen">
+  <div class="wrap">
+    <div class="section-kicker">⚠ JENNIFER.EXE HAS ENTERED THE CHAT</div>
+    <h2 class="section-title">YOU HAVE BEEN ACCIDENTALLY SUMMONED.</h2>
+    <p class="intro">There are <strong>10 VERY IMPORTANT THINGS</strong> you are legally required to know about yourself.<br><br>There may also be cats. We have lost control of the cats.</p>
+    <div class="quest-box">
+      <p>TODAY'S OBJECTIVE:<br><strong>GET THROUGH 10 COMPLIMENTS WITHOUT ESCAPING.</strong><br><small>Failure is acceptable. Being awesome is mandatory.</small></p>
+      <button class="cta start-quest" id="startBtn">FINE, LET ME IN →</button>
+    </div>
+
+    <div id="reasons">
+      <div class="section-kicker">THE EXTREMELY SCIENTIFIC TOP 10</div>
+      <h2 class="section-title">Reasons you're suspiciously awesome</h2>
+      <p class="intro">Tap the cards. YES, ALL OF THEM. I DID NOT MAKE THESE LITTLE BOXES FOR DECORATION.</p>
+      <div class="reason-grid" id="reasonGrid"></div>
+      <div class="progress"><span id="progressText">0 / 10 discovered</span><div class="bar"><span id="progressBar"></span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="letter" class="screen">
+  <div class="wrap">
+    <div class="pause">QUEST COMPLETE ♡</div>
+    <div class="letter-intro">Okay.<br>Those were ten reasons.<br>But there's something else.</div>
+    <div class="letter fade-in">
+      <h3>DEAR JENNIFER ♡</h3>
+      <p class="signature">Happy birthday, Jennifer. ♡</p>
+    </div>
+    <div class="final-line">You are loved.<br>Don't forget that.</div>
+  </div>
+</section>
+
+<section id="final" class="screen">
+  <div class="heartburst"><span class="particle">♡</span><span class="particle">✦</span><span class="particle">🐱</span><span class="particle">♡</span><span class="particle">✧</span><span class="particle">♡</span></div>
+  <div class="final-card">
+    <div class="complete">QUEST COMPLETE</div>
+    <h2>JENNIFER</h2>
+    <div class="stats">
+      <div class="stat-line"><span>STATUS</span><strong>AWESOME</strong></div>
+      <div class="stat-line"><span>CAT ENERGY</span><strong>100%</strong></div>
+      <div class="stat-line"><span>CHAOS</span><strong>MAXIMUM</strong></div>
+      <div class="stat-line"><span>COOLNESS</span><strong>UNFAIR</strong></div>
+      <div class="stat-line loved"><span>LOVED</span><strong>██████████ 100%</strong></div>
+    </div>
+    <p class="ending">Keep being unapologetically you.<br><br>Happy Birthday, Jennifer. ♡</p>
+  </div>
+</section>
+
+<script>
+const reasons = [
+ ['01','🎀','You are illegally cute','Like genuinely suspicious. Someone needs to investigate how you keep getting away with being this adorable.'],
+ ['02','🐈','Cats would probably choose you','And cats are notoriously judgmental little landlords, so that is basically a five-star character reference.'],
+ ['03','😎','You have stupid amounts of cool','Not normal cool. Not "wears sunglasses indoors" cool. Somehow-you-just-exist-and-it-works cool. Rude, honestly.'],
+ ['04','💥','Your chaos has seasoning','You could probably turn a completely normal Tuesday into a side quest. That is a talent and I refuse to hear otherwise.'],
+ ['05','🧍‍♀️','You are weird in the correct way','The world already has enough boring people standing around being beige. Thank you for not contributing to the problem.'],
+ ['06','🧠','Your brain is a beautiful menace','I have no idea what goes on in there half the time, but I respect the commitment to whatever the hell is happening.'],
+ ['07','✨','You make existing look cool','Somehow you can just be sitting there doing absolutely nothing and still have main-character energy. This is deeply unfair to everyone else.'],
+ ['08','🫵','You are extremely Jennifer-shaped','There is exactly one you. Scientists have tried to reproduce the phenomenon. The cloning department has given up.'],
+ ['09','💗','You deserve an unreasonable amount of love','Not the sensible little amount people hand out when they remember. I mean the obnoxious, embarrassing, aggressively obvious kind.'],
+ ['10','🌟','I am stupidly proud of you','For being you. For becoming you. For continuing to be you. No upgraded Jennifer required. This version is already pretty damn great.']
+];
+
+const grid=document.getElementById('reasonGrid');
+let discovered=0;
+reasons.forEach(([num,icon,title,text])=>{
+  const card=document.createElement('div');
+  card.className='reason-card';
+  card.innerHTML=`<div class="reason-inner"><div class="reason-front"><div class="reason-num">REASON ${num}</div><div class="reason-icon">${icon}</div><strong>${title}</strong><div class="tap">TAP TO REVEAL</div></div><div class="reason-back"><div class="reason-num">REASON ${num}</div><strong>${title}</strong><p>${text}</p></div></div>`;
+  card.addEventListener('click',()=>{
+    const first=!card.classList.contains('open');
+    card.classList.toggle('open');
+    if(first){discovered++; updateProgress();}
+  });
+  grid.appendChild(card);
+});
+function updateProgress(){
+  document.getElementById('progressText').textContent=`${discovered} / 10 discovered`;
+  document.getElementById('progressBar').style.width=(discovered*10)+'%';
+  if(discovered===10){
+    setTimeout(()=>document.getElementById('letter').scrollIntoView({behavior:'smooth'}),550);
+  }
+}
+
+document.getElementById('openBtn').addEventListener('click',()=>document.getElementById('world').scrollIntoView({behavior:'smooth'}));
+document.getElementById('startBtn').addEventListener('click',()=>document.getElementById('reasons').scrollIntoView({behavior:'smooth'}));
+
+// Tiny birthday confetti burst when the final section becomes visible.
+const final=document.getElementById('final');
+let burstDone=false;
+const observer=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting && !burstDone){
+    burstDone=true;
+    for(let i=0;i<18;i++){
+      const p=document.createElement('span');
+      p.textContent=['♡','✦','✧','🐱'][Math.floor(Math.random()*4)];
+      p.className='particle';
+      p.style.left=(Math.random()*96)+'%';
+      p.style.animationDelay=(Math.random()*2.5)+'s';
+      p.style.fontSize=(14+Math.random()*16)+'px';
+      document.querySelector('.heartburst').appendChild(p);
+    }
+  }
+},{threshold:.35});
+observer.observe(final);
+</script>
+</body>
+</html>
